@@ -1,0 +1,96 @@
+html, body{ margin:0 auto; height:100%; width:100%; background-color:#ffffff;}
+
+li{
+	margin-left: 60px;
+}
+
+td{
+	width:100px;
+	height:30px;
+}
+.redis1{
+	width:100%;
+	height:50%;
+	position: absolute;
+	left:0%;
+	top:0%;
+	overflow-y:scroll;
+}
+.redis2{
+	width:100%;
+	height:50%;
+	background-color:#bf8082;
+	position: absolute;
+	left:0%;
+	top:50%;
+	overflow-y:scroll;
+}
+
+.index{
+	width:15%;
+	height:15%;
+	position: absolute;
+	left:40%;
+	top:35%;
+}
+
+.logo{
+	width:30%;
+	height:30%;
+	position: absolute;
+	left:39%;
+	top:20%;
+}
+
+.bg{
+	background-repeat:no-repeat;
+	width:100%;
+	height:100%;
+	background-color:#ffffff;
+	overflow: hidden;
+	
+}
+
+.leftbox{
+	width:15%;
+	height:100%;
+	background-color:#b6c4fc;
+	padding-left:10px;
+	overflow:auto;
+	position: absolute;
+}
+
+.rightbox{
+	width:85%;
+	height:100%;
+	background-color:#d6d6f3;
+	position: relative;
+	left:15%;
+	overflow:hidden;
+}
+
+.anniu{
+	position: absolute;
+	left:15px;
+	top:5px;
+}
+
+.anniu1{
+	width:70px;
+	position: absolute;
+	left:90px;
+	top:5px;
+}
+.anniu2{
+	position: absolute;
+	top:25px;
+
+}
+
+.anniu3{
+	width:70px;
+	height:40px;
+	position: relative;
+	left:75px;
+	top:25px;
+}

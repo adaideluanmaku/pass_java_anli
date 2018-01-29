@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- 所有匹配*.action的请求都由struts2处理 -->
+    <constant name="struts.action.extension" value="action" />
+    <!-- <constant name="struts.action.extension" value="," /> -->
+    <!-- 是否启用开发模式 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- struts配置文件改动后，是否重新加载 -->
+    <constant name="struts.configuration.xml.reload" value="true" />
+    <!-- 设置浏览器是否缓存静态内容 -->
+    <constant name="struts.serve.static.browserCache" value="false" />
+    <!-- 请求参数的编码方式 -->
+    <constant name="struts.i18n.encoding" value="GBK" />
+    <!-- 每次HTTP请求系统都重新加载资源文件，有助于开发 -->
+    <constant name="struts.i18n.reload" value="true" />
+    <!-- 文件上传最大值 -->
+    <constant name="struts.multipart.maxSize" value="104857600" />
+    <!-- 让struts2支持动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <!-- Action名称中是否还是用斜线 -->
+    <constant name="struts.enable.SlashesInActionNames" value="false" />
+    <!-- 允许标签中使用表达式语法 -->
+    <constant name="struts.tag.altSyntax" value="true" />
+    <!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
+    <constant name="struts.dispatcher.parametersWorkaround" value="false" />
+    
+    <!-- 
+    <result name="error" type="dispatcher">转发
+	<result name="success" type="redirect">重定向。
+     -->
+
+    <package name="default" namespace="/" extends="struts-default">
+    	<action name="Login" class="ch.com.action.Loginaction" >
+			<result name="success1" >/login.jsp</result>
+			<result name="success2" >/dao.jsp</result>
+			<result name="success3" type="redirect">/index.jsp</result>
+		</action>
+		
+		<action name="Anliaction" class="ch.com.action.Anliaction" >
+			<result name="success">/page/anliliebiao.jsp</result>
+		</action>
+		
+		<action name="Sa_gather_json" class="ch.com.action.Sa_gather_json" >
+			<result name="success1">/page/gather_json.jsp</result>
+			<result name="success2">/page/json_err.jsp</result>
+		</action>
+		
+		<action name="Json_err" class="ch.com.action.Json_err" >
+			<result name="success">/page/anliliebiao.jsp</result>
+		</action>
+
+		<action name="Passwinaction" class="ch.com.action.Passwinaction" >
+			<result name="success">/page/gather_json.jsp</result>
+		</action>
+		
+		<action name="Passredisquery" class="ch.com.action.Passredisquery" >
+			<result name="success">/redis.jsp</result>
+		</action>
+		
+		<action name="Redis_keys" class="ch.com.action.Redis_keys" >
+			<!--
+			<result name="success" type="redirect">/redis_keys.jsp?version=${version}&amp;message=${message};anliname=${anliname};tablename=${tablename};selectsql=${selectsql};updatesql=${updatesql};recsql=${recsql}
+			</result>
+			-->
+			<!-- <param name="version">${version}</param> -->
+			
+			<result name="success" >/redis_keys.jsp</result>
+		</action>
+		
+		<action name="ServerIP" class="ch.com.action.ServerIP" >
+			<result name="success">/serverip.jsp</result>
+		</action>
+		
+    </package>
+
+    <include file="example.xml"/>
+
+    <!-- Add packages here -->
+
+</struts>

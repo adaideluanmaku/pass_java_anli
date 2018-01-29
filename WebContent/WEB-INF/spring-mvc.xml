@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+	default-lazy-init="true">
+
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.medicom" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	 
+	<!-- 解决 报406的错误证明是MIME不匹配导致，由于uploadify的accept为text/*， 这个在spring是不存在的 
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean
+				class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				<property name="prefixJson" value="false"  />
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json</value>
+						<value>text/json</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	 解决 报406的错误证明是MIME不匹配导致，由于uploadify的accept为text/*， 这个在spring是不存在的-->
+
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 
+		<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+		<list>
+		<value>text/html;charset=UTF-8</value>
+		</list>
+		</property>
+		</bean>
+	-->
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 
+		<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+		<list>
+		<ref bean="mappingJacksonHttpMessageConverter" />
+		</list>
+		</property>
+		</bean>
+	-->
+
+	<mvc:annotation-driven />
+
+	<!-- 对静态资源文件的访问 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 定义JSP文件的位置 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 自定义异常管理类 -->
+	<bean id="commonExceptionHandler" class="com.medicom.modules.exceptions.CommonExceptionHandler" />
+	<!-- 加载配置文件 -->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/plugConfig.properties" />
+
+   <!-- 验证码管理类(数字、字母验证码) -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg type="java.util.Properties">
+					<props>
+						<prop key="kaptcha.image.width">300</prop>
+						<prop key="kaptcha.image.height">60</prop>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.textproducer.char.string">0123456789abcdefghijklmnopqrstuvwxyz</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<!-- 验证码管理类(中文验证码) -->
+	<!-- 中文验证码配置文件 -->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/plugConfig.properties" />
+	<bean id="chineseTextProducer" class="com.medicom.commons.captcha.ChineseTextProducer">
+		<property name="simplifiedChineseTexts">
+			<value>${kaptchavalue}</value>
+		</property>
+	</bean>
+	<bean id="captchaCnProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg type="java.util.Properties">
+					<props>
+						<prop key="kaptcha.image.width">300</prop>
+						<prop key="kaptcha.image.height">60</prop>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体, Courier</prop>
+						<prop key="kaptcha.textproducer.char.string">23456789abcdefghjklmnpqrstuvwxyz</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<!-- 验证码结束 -->
+ 
+
+	<!-- 文件上传配置 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 限制文件大小10M -->
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="4096" />
+	</bean>
+
+	<!-- 定义无Controller的path<->view直接映射 -->
+	<!-- -->
+	<mvc:view-controller path="/" view-name="redirect:/login.jsp" />
+	
+	
+	 
+</beans>
