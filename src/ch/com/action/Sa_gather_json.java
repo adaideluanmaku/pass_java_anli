@@ -493,7 +493,7 @@ public class Sa_gather_json {
 				anlitype=8;
 			}
 		}
-		//�����json�����ݿ����Ա�
+		//json
 		if("1712".equals(version)){
 			Screenresule_1712 Screenresule=new Screenresule_1712();
 			if(anlitype==1 || anlitype==2){
@@ -516,11 +516,11 @@ public class Sa_gather_json {
 					gatherresult_java=Xmltojson.getjson(gatherresult_java);
 				}
 				if(!gatherresult_java.equals(gatherresult)){
-					json_err.add("���ԣ�"+gatherresult);
-					json_err.add("��Ӧ��"+gatherresult_java);
+					json_err.add("Assertion："+gatherresult);
+					json_err.add("response："+gatherresult_java);
 				}
 			}
-		}else{
+		}else if("1609".equals(version)){
 			Screenresule_1609 Screenresule=new Screenresule_1609();
 			if(anlitype==1 || anlitype==2){
 				json_err=Screenresule.screenres(gatherresult,gatherresult_java);
@@ -542,8 +542,8 @@ public class Sa_gather_json {
 					gatherresult_java=Xmltojson.getjson(gatherresult_java);
 				}
 				if(!gatherresult_java.equals(gatherresult)){
-					json_err.add("���ԣ�"+gatherresult);
-					json_err.add("��Ӧ��"+gatherresult_java);
+					json_err.add("Assertion："+gatherresult);
+					json_err.add("response："+gatherresult_java);
 				}
 			}
 		}
