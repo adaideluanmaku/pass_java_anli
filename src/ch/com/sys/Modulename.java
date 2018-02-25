@@ -1,5 +1,16 @@
 package ch.com.sys;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.Map;
+
+import com.ch.jdbc.Mysqlconn;
+
 public class Modulename {
 	public int anlitype=0;
 	public int moduleid=0;
@@ -20,196 +31,235 @@ public class Modulename {
 	//	public String getName(int anlitype1, int moduleid1){
 //		String name=null;
 //		if(anlitype==0&&moduleid==0){
-//			name="test°¸Àı";
-//		}else if(anlitype==0&&moduleid==1){//×Ô¶¯Éó²é
-//			name="¼ÁÁ¿·¶Î§";
+//			name="testï¿½ï¿½ï¿½ï¿½";
+//		}else if(anlitype==0&&moduleid==1){//ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§";
 //		}else if(anlitype==0&&moduleid==2){
-//			name="¸ÎËğº¦¼ÁÁ¿";
+//			name="ï¿½ï¿½ï¿½ğº¦¼ï¿½ï¿½ï¿½";
 //		}else if(anlitype==0&&moduleid==3){
-//			name="ÉöËğº¦¼ÁÁ¿";
+//			name="ï¿½ï¿½ï¿½ğº¦¼ï¿½ï¿½ï¿½";
 //		}else if(anlitype==0&&moduleid==4){
-//			name="Ïà»¥×÷ÓÃ";
+//			name="ï¿½à»¥ï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==0&&moduleid==5){
-//			name="ÌåÍâÅäÎé";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==0&&moduleid==6){
-//			name="ÅäÎéÅ¨¶È";
+//			name="ï¿½ï¿½ï¿½ï¿½Å¨ï¿½ï¿½";
 //		}else if(anlitype==0&&moduleid==7){
-//			name="Ò©Îï½û¼ÉÖ¢";
+//			name="Ò©ï¿½ï¿½ï¿½ï¿½ï¿½Ö¢";
 //		}else if(anlitype==0&&moduleid==8){
-//			name="²»Á¼·´Ó¦";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦";
 //		}else if(anlitype==0&&moduleid==9){
-//			name="³¬ÊÊÓ¦Ö¢";
+//			name="ï¿½ï¿½ï¿½ï¿½Ó¦Ö¢";
 //		}else if(anlitype==0&&moduleid==10){
-//			name="¶ùÍ¯ÓÃÒ©";
+//			name="ï¿½ï¿½Í¯ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==11){
-//			name="³ÉÈËÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==12){
-//			name="ÀÏÈËÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==13){
-//			name="ÈÑÉïÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==14){
-//			name="²¸ÈéÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==15){
-//			name="ĞÔ±ğÓÃÒ©";
+//			name="ï¿½Ô±ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==16){
-//			name="Ò©Îï¹ıÃô";
+//			name="Ò©ï¿½ï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==0&&moduleid==17){
-//			name="¸øÒ©Í¾¾¶";
+//			name="ï¿½ï¿½Ò©Í¾ï¿½ï¿½";
 //		}else if(anlitype==0&&moduleid==18){
-//			name="ÖØ¸´ÓÃÒ©";
+//			name="ï¿½Ø¸ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==19){
-//			name="Ô½È¨ÓÃÒ©";
+//			name="Ô½È¨ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==20){
-//			name="Î§ÊõÆÚÓÃÒ©";
+//			name="Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==0&&moduleid==21){
-//			name="Ï¸¾úÄÍÒ©ÂÊ";
-//		}else if(anlitype==1&&moduleid==1){//ÊÖ¶¯Éó²é
-//			name="¼ÁÁ¿·¶Î§";
+//			name="Ï¸ï¿½ï¿½ï¿½ï¿½Ò©ï¿½ï¿½";
+//		}else if(anlitype==1&&moduleid==1){//ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§";
 //		}else if(anlitype==1&&moduleid==2){
-//			name="¸ÎËğº¦¼ÁÁ¿";
+//			name="ï¿½ï¿½ï¿½ğº¦¼ï¿½ï¿½ï¿½";
 //		}else if(anlitype==1&&moduleid==3){
-//			name="ÉöËğº¦¼ÁÁ¿";
+//			name="ï¿½ï¿½ï¿½ğº¦¼ï¿½ï¿½ï¿½";
 //		}else if(anlitype==1&&moduleid==4){
-//			name="Ïà»¥×÷ÓÃ";
+//			name="ï¿½à»¥ï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==1&&moduleid==5){
-//			name="ÌåÍâÅäÎé";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==1&&moduleid==6){
-//			name="ÅäÎéÅ¨¶È";
+//			name="ï¿½ï¿½ï¿½ï¿½Å¨ï¿½ï¿½";
 //		}else if(anlitype==1&&moduleid==7){
-//			name="Ò©Îï½û¼ÉÖ¢";
+//			name="Ò©ï¿½ï¿½ï¿½ï¿½ï¿½Ö¢";
 //		}else if(anlitype==1&&moduleid==8){
-//			name="²»Á¼·´Ó¦";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦";
 //		}else if(anlitype==1&&moduleid==9){
-//			name="³¬ÊÊÓ¦Ö¢";
+//			name="ï¿½ï¿½ï¿½ï¿½Ó¦Ö¢";
 //		}else if(anlitype==1&&moduleid==10){
-//			name="¶ùÍ¯ÓÃÒ©";
+//			name="ï¿½ï¿½Í¯ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==11){
-//			name="³ÉÈËÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==12){
-//			name="ÀÏÈËÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==13){
-//			name="ÈÑÉïÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==14){
-//			name="²¸ÈéÓÃÒ©";
+//			name="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==15){
-//			name="ĞÔ±ğÓÃÒ©";
+//			name="ï¿½Ô±ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==16){
-//			name="Ò©Îï¹ıÃô";
+//			name="Ò©ï¿½ï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==1&&moduleid==17){
-//			name="¸øÒ©Í¾¾¶";
+//			name="ï¿½ï¿½Ò©Í¾ï¿½ï¿½";
 //		}else if(anlitype==1&&moduleid==18){
-//			name="ÖØ¸´ÓÃÒ©";
+//			name="ï¿½Ø¸ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==19){
-//			name="Ô½È¨ÓÃÒ©";
+//			name="Ô½È¨ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==20){
-//			name="Î§ÊõÆÚÓÃÒ©";
+//			name="Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
 //		}else if(anlitype==1&&moduleid==21){
-//			name="Ï¸¾úÄÍÒ©ÂÊ";
-//		}else if(anlitype==2&&moduleid==11){//ÊÖ¶¯ËµÃ÷Êé
-//		name="Ò©Æ·ËµÃ÷Êé";
+//			name="Ï¸ï¿½ï¿½ï¿½ï¿½Ò©ï¿½ï¿½";
+//		}else if(anlitype==2&&moduleid==11){//ï¿½Ö¶ï¿½Ëµï¿½ï¿½ï¿½ï¿½
+//		name="Ò©Æ·Ëµï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==2&&moduleid==14){
-//			name="×Ô¶¨ÒåÒ©Æ·ËµÃ÷Êé";
+//			name="ï¿½Ô¶ï¿½ï¿½ï¿½Ò©Æ·Ëµï¿½ï¿½ï¿½ï¿½";
 //		}else if(anlitype==3&&moduleid==51){
-//			name="¼òÒªĞÅÏ¢";
+//			name="ï¿½ï¿½Òªï¿½ï¿½Ï¢";
 //		}else if(anlitype==3&&moduleid==52){
-//			name="ÖØÒªÌáÊ¾";
+//			name="ï¿½ï¿½Òªï¿½ï¿½Ê¾";
 //		}
 //		return name;
 //	}
 	
 	public void module(String Name){
-		if(Name.contains("¸¡¶¯´°¿Ú")){//ÅĞ¶Ï²éÑ¯Ä£¿é
+		if(Name.contains("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")){//ï¿½Ğ¶Ï²ï¿½Ñ¯Ä£ï¿½ï¿½
 			moduleid=52;
-			modulename="ÖØÒªÌáÊ¾";
-		}else if(Name.contains("ËµÃ÷Êé")){
+			modulename="ï¿½ï¿½Òªï¿½ï¿½Ê¾";
+		}else if(Name.contains("Ëµï¿½ï¿½ï¿½ï¿½")){
 			moduleid=11;
-			modulename="ËµÃ÷Êé";
-		}else if(Name.contains("·¶Î§")  || Name.contains("³¬¶àÈÕ")){//ÅĞ¶ÏÉó²éÄ£¿é
+			modulename="Ëµï¿½ï¿½ï¿½ï¿½";
+		}else if(Name.contains("ï¿½ï¿½Î§")  || Name.contains("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")){//ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
 			moduleid=1;
-			modulename="¼ÁÁ¿·¶Î§";
-		}else if(Name.contains("¸ÎËğ")){
+			modulename="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=2;
-			modulename="¸ÎËğº¦¼ÁÁ¿";
-		}else if(Name.contains("ÉöËğ")){
+			modulename="ï¿½ï¿½ï¿½ğº¦¼ï¿½ï¿½ï¿½";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=3;
-			modulename="ÉöËğº¦¼ÁÁ¿";
-		}else if(Name.contains("Ïà»¥")){
+			modulename="ï¿½ï¿½ï¿½ğº¦¼ï¿½ï¿½ï¿½";
+		}else if(Name.contains("ï¿½à»¥")){
 			moduleid=4;
-			modulename="Ïà»¥×÷ÓÃ";
-		}else if(Name.contains("ÌåÍâ") || Name.contains("ÌåÍâ-")){
+			modulename="ï¿½à»¥ï¿½ï¿½ï¿½ï¿½";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½") || Name.contains("ï¿½ï¿½ï¿½ï¿½-")){
 			moduleid=5;
-			modulename="ÌåÍâÅäÎé";
-		}else if(Name.contains("ÅäÎéÅ¨¶È") || Name.contains("ÅäÎé-Å¨¶È") || Name.contains("¼ØÀë×Ó")){
+			modulename="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½Å¨ï¿½ï¿½") || Name.contains("ï¿½ï¿½ï¿½ï¿½-Å¨ï¿½ï¿½") || Name.contains("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=6;
-			modulename="ÅäÎéÅ¨¶È";
-		}else if(Name.contains("Ò©Îï½û¼É") || Name.contains("Ò©Îï-½û¼É")){
+			modulename="ï¿½ï¿½ï¿½ï¿½Å¨ï¿½ï¿½";
+		}else if(Name.contains("Ò©ï¿½ï¿½ï¿½ï¿½ï¿½") || Name.contains("Ò©ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=7;
-			modulename="Ò©Îï½û¼É";
-		}else if(Name.contains("²»Á¼")){
+			modulename="Ò©ï¿½ï¿½ï¿½ï¿½ï¿½";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=8;
-			modulename="²»Á¼·´Ó¦";
-		}else if(Name.contains("³¬ÊÊ")){
+			modulename="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=9;
-			modulename="³¬ÊÊÓ¦Ö¢";
-		}else if(Name.contains("¶ùÍ¯")){
+			modulename="ï¿½ï¿½ï¿½ï¿½Ó¦Ö¢";
+		}else if(Name.contains("ï¿½ï¿½Í¯")){
 			moduleid=10;
-			modulename="¶ùÍ¯ÓÃÒ©";
-		}else if(Name.contains("³ÉÈË")){
+			modulename="ï¿½ï¿½Í¯ï¿½ï¿½Ò©";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=11;
-			modulename="³ÉÈËÓÃÒ©";
-		}else if(Name.contains("ÀÏÈË")){
+			modulename="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=12;
-			modulename="ÀÏÈËÓÃÒ©";
-		}else if(Name.contains("ÈÑÉï")){
+			modulename="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=13;
-			modulename="ÈÑÉïÓÃÒ©";
-		}else if(Name.contains("²¸Èé")){
+			modulename="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=14;
-			modulename="²¸ÈéÓÃÒ©";
-		}else if(Name.contains("ĞÔ±ğ")){
+			modulename="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò©";
+		}else if(Name.contains("ï¿½Ô±ï¿½")){
 			moduleid=15;
-			modulename="ĞÔ±ğÓÃÒ©";
-		}else if(Name.contains("¹ıÃô")){
+			modulename="ï¿½Ô±ï¿½ï¿½ï¿½Ò©";
+		}else if(Name.contains("ï¿½ï¿½ï¿½ï¿½")){
 			moduleid=16;
-			modulename="Ò©Îï¹ıÃô";
-		}else if(Name.contains("¸øÒ©")){
+			modulename="Ò©ï¿½ï¿½ï¿½ï¿½ï¿½";
+		}else if(Name.contains("ï¿½ï¿½Ò©")){
 			moduleid=17;
-			modulename="¸øÒ©Í¾¾¶";
-		}else if(Name.contains("ÖØ¸´")){
+			modulename="ï¿½ï¿½Ò©Í¾ï¿½ï¿½";
+		}else if(Name.contains("ï¿½Ø¸ï¿½")){
 			moduleid=18;
-			modulename="ÖØ¸´ÓÃÒ©";
+			modulename="ï¿½Ø¸ï¿½ï¿½ï¿½Ò©";
 		}else if(Name.contains("Ô½È¨")){
 			moduleid=19;
-			modulename="Ô½È¨ÓÃÒ©";
-		}else if(Name.contains("Î§ÊÖ") ){
+			modulename="Ô½È¨ï¿½ï¿½Ò©";
+		}else if(Name.contains("Î§ï¿½ï¿½") ){
 			moduleid=20;
-			modulename="Î§ÊÖÊõÆÚ";
-		}else if(Name.contains("Ï¸¾ú")){
+			modulename="Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+		}else if(Name.contains("Ï¸ï¿½ï¿½")){
 			moduleid=21;
-			modulename="Ï¸¾úÄÍÒ©";
+			modulename="Ï¸ï¿½ï¿½ï¿½ï¿½Ò©";
 		}else{
 			moduleid=0;
-			modulename="Î´Æ¥Åä";
+			modulename="Î´Æ¥ï¿½ï¿½";
 		}
 	}
 	
-	public void getId(String Name){
+	public void module1(String Name) throws ClassNotFoundException, SQLException, IOException{
+		Mysqlconn mysql=new Mysqlconn();
+		Connection mysqlconn=mysql.getConn();
+		Statement st=null;
+		ResultSet rs=null;
+		String sql=null;
 		
-		if(Name.contains("¸¡¶¯")){//¸¡¶¯´°¿Ú°¸Àı
+		StrLevenshtein strLevenshtein = new StrLevenshtein();
+		sql="select moduleid,modulename from  mc_modulename where moduletype=1";
+		st= mysqlconn.createStatement();
+		rs=st.executeQuery(sql);
+		List list = mysql.getlist(rs);
+		int maxint=0;
+		for(int i=0; i<list.size();i++){
+			Map map = (Map)list.get(i);
+//			float strint=strLevenshtein.getSimilarityRatio(map.get("modulename").toString(),Name);
+			int strint=strLevenshtein.str2tosame(map.get("modulename").toString(),Name);
+			if(strint>maxint){
+				maxint=strint;
+				modulename=map.get("modulename").toString();
+				moduleid=Integer.parseInt(map.get("moduleid").toString());
+//				if(strint==1){
+//					break;
+//				}
+			}
+		}
+		
+		if(maxint==0){
+			moduleid=0;
+			modulename="æœªå®šä½";
+		}
+		rs.close();
+		st.close();
+		mysqlconn.close();
+	}
+	
+	public void getId(String Name) throws ClassNotFoundException, SQLException, IOException{
+		
+		if(Name.contains("æµ®åŠ¨")){//fudong
 			anlitype=4;
-			module(Name);
-		}else if(Name.contains("ÊÖ¶¯")){//ÊÖ¶¯°¸Àı
+			module1(Name);
+		}else if(Name.contains("æ‰‹åŠ¨")){//shoudong
 			anlitype=2;
-			module(Name);
-		}else if(Name.contains("ËµÃ÷Êé")){//ËµÃ÷Êé°¸Àı
+			module1(Name);
+		}else if(Name.contains("è¯´æ˜ä¹¦")){//shuomingshu
 			anlitype=3;
-			module(Name);
-		}else {//Î´¶¨Î»°¸Àı
-			module(Name);//ÏÈ»ñÈ¡Ä£¿é¶¨Î»
+			module1(Name);
+		}else  if(Name.contains("ZYZDY")){//ziyouzidingyi
+			anlitype=10;
+			module1(Name);
+		}else{//
+			module1(Name);//
 			if(moduleid>0){
-				anlitype=1;//×Ô¶¯°¸Àı
+				anlitype=1;//
 			}else{
-				anlitype=9;//Î´¶¨Î»
+				anlitype=9;//
 			}
 		}
 	}

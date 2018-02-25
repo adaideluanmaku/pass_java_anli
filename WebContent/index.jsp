@@ -19,7 +19,8 @@
 		<form action="Login.action" method="post">
 			程序版本号:<select name="version">
 				<option value="1609">1609</option>
-				<option value="1612">1612</option>
+				<option value="1712">1712</option>
+				
 			</select>
 			<input type="submit" value="登录">
 		</form>

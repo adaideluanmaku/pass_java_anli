@@ -25,7 +25,7 @@ import com.ch.jdbc.Sqlserverconn;
 
 /**
  * 2016.11.26
- * ´Ósqlserverµ¼ÈëÊı¾İµ¼mysqlÖĞ
+ * ï¿½ï¿½sqlserverï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İµï¿½mysqlï¿½ï¿½
  * **/
 public class Daoanli {
 	public String anliname;
@@ -33,13 +33,16 @@ public class Daoanli {
 	public int moduleid=0;
 	public String modulename;
 	
-	//ÊäÈëJSON½âÎö
+	//ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½
 	public void Baseinfo(String json,String version) throws ClassNotFoundException, SQLException, IOException{
 		JSONObject jsonin=JSONObject.fromObject(json);
 		JSONObject Patient=jsonin.getJSONObject("Patient");
 		anliname=Patient.getString("Name");
+		if("".equals(anliname) || anliname==null){
+			anliname="æœªæ‰¾åˆ°æ¡ˆä¾‹åç§°";
+		}
 		
-		//¶ÁÈ¡Ô­À´°¸ÀıµÄ±ä¸ü¼ÇÂ¼
+		//ï¿½ï¿½È¡Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½Â¼
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;
@@ -71,20 +74,23 @@ public class Daoanli {
 			moduleid=Module.getModuleid();
 			modulename=Module.getModulename();
 		}
+		rs.close();
+		pst.close();
+		mysqlconn.close();
 	}
 	
-	//sqlserverµ¼°¸ÀıÊı¾İµ¼mysql
+	//sqlserverï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İµï¿½mysql
 	public String Sqlser_to_mysql_all(String version,int dao,String anliname1) throws ClassNotFoundException, SQLException, IOException{
 		if(StringUtils.isBlank(version)){
-			return "ÇëÊäÈë°æ±¾ºÅ";
+			return "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½";
 		}
 		InputStream in=Mysqlconn.class.getClassLoader().getResourceAsStream("config.properties");
 		Properties prop=new Properties();		
 		prop.load(in);
 		
-		//½ÓÁ¬sqlserverÊı¾İ¿â
+		//ï¿½ï¿½ï¿½ï¿½sqlserverï¿½ï¿½ï¿½İ¿ï¿½
 		Sqlserverconn sqlser=new Sqlserverconn();
-		//½ÓÁ¬mysqlÊı¾İ¿â
+		//ï¿½ï¿½ï¿½ï¿½mysqlï¿½ï¿½ï¿½İ¿ï¿½
 		Mysqlconn mysql=new Mysqlconn();
 		
 		Connection sqlserconn=sqlser.getConn();
@@ -99,7 +105,7 @@ public class Daoanli {
 		rs=st.executeQuery(sql);
 		List sqlserlist=sqlser.getlist(rs);
 		
-		//µ¼ÈëÇ°É¾³ılog±í,È«É¾³ı»òÉ¾³ı²¿·Ö°¸Àı
+		//ï¿½ï¿½ï¿½ï¿½Ç°É¾ï¿½ï¿½logï¿½ï¿½,È«É¾ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ï¿½ï¿½
 		if(dao==111){
 			sql="delete from sa_gather_log where version=? and usertype <> 1";
 			pst=mysqlconn.prepareStatement(sql);
@@ -107,7 +113,7 @@ public class Daoanli {
 			pst.executeUpdate();
 		}else if(dao==112){
 			if("".equals(anliname1) || anliname1==null){
-				return "°¸ÀıÃû³ÆÎª¿Õ";
+				return "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½";
 			}
 			sql="delete from  sa_gather_log where anliname like ? and version=? and usertype <> 1";
 			pst=mysqlconn.prepareStatement(sql);
@@ -122,7 +128,7 @@ public class Daoanli {
 			pst.executeUpdate();
 		}
 		
-		//É¾³ıÀ¬»øÊı¾İ,È«É¾³ı»òÉ¾³ı²¿·Ö°¸Àı
+		//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,È«É¾ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ï¿½ï¿½
 		if(dao==111){
 			sql="delete from anli_err where version=?";
 			pst=mysqlconn.prepareStatement(sql);
@@ -143,20 +149,20 @@ public class Daoanli {
 		}
 		
 		
-		// Ä¬ÈÏÇé¿öÏÂÃ¿Ö´ĞĞÒ»ÌõsqlÌá½»Ò»´Î ,¹Ø±Õ×Ô¶¯Ìá½»£¬¿ÉÅäºÏ.commit()ÊµÏÖÅúÁ¿Ö´ĞĞsql
+		// Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Ö´ï¿½ï¿½Ò»ï¿½ï¿½sqlï¿½á½»Ò»ï¿½ï¿½ ,ï¿½Ø±ï¿½ï¿½Ô¶ï¿½ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.commit()Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½sql
 		
 		String hiscode=prop.getProperty("hiscode");
-		Updatejson Updatejson=new Updatejson();//µ¼Êı¾İÊ±¸ü¸ÄHISCODEÖµ
+		Updatejson Updatejson=new Updatejson();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½HISCODEÖµ
 		mysqlconn.setAutoCommit(false);
 		sql="insert into sa_gather_log(gatherbaseinfo,gatherresult,anliname,anlitype,moduleid,modulename,version,usertype) values(?,?,?,?,?,?,?,?)";
 		pst=mysqlconn.prepareStatement(sql);
 		
 		for(int i=0;i<sqlserlist.size();i++){
 			Map sqlsermap=(Map)sqlserlist.get(i);
-			//gatherbaseinfo½âÎö°¸Àı,·Ö½âÀàĞÍ
+			//gatherbaseinfoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Baseinfo(sqlsermap.get("gatherbaseinfo").toString(),version);
 			if(dao==111){
-				String gatherbaseinfo=Updatejson.getUpdate(sqlsermap.get("gatherbaseinfo").toString(),hiscode);//Ìæ»»HISCODE
+				String gatherbaseinfo=Updatejson.getUpdate(sqlsermap.get("gatherbaseinfo").toString(),hiscode);//ï¿½æ»»HISCODE
 				pst.setString(1, gatherbaseinfo);
 				pst.setString(2, sqlsermap.get("gatherresult").toString());
 				pst.setString(3, anliname);
@@ -168,7 +174,7 @@ public class Daoanli {
 				pst.addBatch();
 			}else if(dao==112){
 				if(anliname.contains(anliname1)){
-					String gatherbaseinfo=Updatejson.getUpdate(sqlsermap.get("gatherbaseinfo").toString(),hiscode);//Ìæ»»HISCODE
+					String gatherbaseinfo=Updatejson.getUpdate(sqlsermap.get("gatherbaseinfo").toString(),hiscode);//ï¿½æ»»HISCODE
 					pst.setString(1, gatherbaseinfo);
 					pst.setString(2, sqlsermap.get("gatherresult").toString());
 					pst.setString(3, anliname);
@@ -181,7 +187,7 @@ public class Daoanli {
 				}
 			}else{
 				if(anlitype==dao){
-					String gatherbaseinfo=Updatejson.getUpdate(sqlsermap.get("gatherbaseinfo").toString(),hiscode);//Ìæ»»HISCODE
+					String gatherbaseinfo=Updatejson.getUpdate(sqlsermap.get("gatherbaseinfo").toString(),hiscode);//ï¿½æ»»HISCODE
 					pst.setString(1, gatherbaseinfo);
 					pst.setString(2, sqlsermap.get("gatherresult").toString());
 					pst.setString(3, anliname);
@@ -195,11 +201,11 @@ public class Daoanli {
 			}
 		}
 		pst.executeBatch();
-		//ÅäºÏsetAutoCommit(false)·½·¨£¬ÅúÁ¿Ö´ĞĞSQL
+		//ï¿½ï¿½ï¿½setAutoCommit(false)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½SQL
 		mysqlconn.commit();
-		System.out.println("Êı¾İµ¼Èë½áÊø");
+		System.out.println("ï¿½ï¿½ï¿½İµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		
-		//Êı¾İÖØ¸´£¬È¥ÖØ´¦Àí
+		//å»é‡å¤„ç†
 		if(dao==111){
 			sql="select anlitype,moduleid,modulename,anliname,version,gatherbaseinfo,gatherresult from sa_gather_log where version=? and usertype <> 1 group by anliname,version ";
 			pst=mysqlconn.prepareStatement(sql);
@@ -225,7 +231,7 @@ public class Daoanli {
 		}
 		List sqlserlist1=mysql.getlist(rs);
 		
-		//µ¼ÈëÇ°É¾³ılog±í
+		//ï¿½ï¿½ï¿½ï¿½Ç°É¾ï¿½ï¿½logï¿½ï¿½
 		if(dao==111){
 			sql="delete from sa_gather_log where version=? and usertype <> 1 ";
 			pst=mysqlconn.prepareStatement(sql);
@@ -264,16 +270,16 @@ public class Daoanli {
 			pst.addBatch();
 		}
 		pst.executeBatch();
-		//ÅäºÏsetAutoCommit(false)·½·¨£¬ÅúÁ¿Ö´ĞĞSQL
+		//ï¿½ï¿½ï¿½setAutoCommit(false)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½SQL
 		mysqlconn.commit();
-		System.out.println("µ¼ÈëÊı¾İÈ¥ÖØ´¦Àí½áÊø");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		
 		st.close();
 		rs.close();
 		pst.close();
 		sqlserconn.close();
 		mysqlconn.close();
-		System.out.println("sqlserverµ¼Èëmysql½áÊø");
-		return "sqlserverµ¼Èëmysql½áÊø";
+		System.out.println("sqlserverï¿½ï¿½ï¿½ï¿½mysqlï¿½ï¿½ï¿½ï¿½");
+		return "sqlserverï¿½ï¿½ï¿½ï¿½mysqlï¿½ï¿½ï¿½ï¿½";
 	}
 }

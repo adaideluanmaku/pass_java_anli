@@ -15,7 +15,7 @@ import net.sf.json.JSONObject;
 
 
 //��jsonshuchu��java���ý���������ͬ�ľ���Ա�
-public class Screenresule_1 {
+public class Screenresule_1609_two {
 	private JSONArray json=null;
 	private JSONArray json1=null;
 	private JSONArray ScreenResults=null;

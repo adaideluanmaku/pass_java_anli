@@ -22,7 +22,7 @@ import net.sf.json.JSONObject;
 
 
 //pass��鷵�ص�json����java-pass���ص�json���Ա�
-public class Screenresule {
+public class Screenresule_1609 {
 	private String json=null;
 	private String json1=null;
 	private List listerr1;
@@ -298,7 +298,7 @@ public class Screenresule {
 							
 							//����Jsonshuchu1�����ж������������ͬ�ľ��������
 							if(modulnames.size()!=0&&modulnames1.size()!=0){
-								Screenresule_1 jsonshuchu1=new Screenresule_1();
+								Screenresule_1609_two jsonshuchu1=new Screenresule_1609_two();
 								jsonshuchu1.setJson(ScreenResults);
 								jsonshuchu1.setJson1(ScreenResults1);
 								jsonshuchu1.setModuleidstr(moduleidstr);

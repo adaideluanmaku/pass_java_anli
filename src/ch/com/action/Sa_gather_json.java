@@ -19,7 +19,8 @@ import ch.com.screen.Detailresule;
 import ch.com.screen.Moduleresule;
 import ch.com.screen.Passscreen;
 import ch.com.screen.Queryresule;
-import ch.com.screen.Screenresule;
+import ch.com.screen.Screenresule_1609;
+import ch.com.screen.Screenresule_1712;
 import ch.com.screen.Xmltojson;
 import ch.com.sys.Jiekoutype;
 import ch.com.sys.Modulename;
@@ -241,7 +242,7 @@ public class Sa_gather_json {
 				mysqlconn.close();
 				return;
 			}
-			Screenresule Screenresule=new Screenresule();
+			Screenresule_1609 Screenresule=new Screenresule_1609();
 			json_err=Screenresule.screenres(gatherresult,gatherresult_java);
 			rs.close();
 			pst.close();
@@ -493,31 +494,60 @@ public class Sa_gather_json {
 			}
 		}
 		//�����json�����ݿ����Ա�
-		Screenresule Screenresule=new Screenresule();
-		if(anlitype==1 || anlitype==2){
-			json_err=Screenresule.screenres(gatherresult,gatherresult_java);
-		}else if(anlitype==5){
-			Detailresule Detailresule= new Detailresule();
-			json_err=Detailresule.detail(gatherresult, gatherresult_java);
-		}else if(anlitype==4 || anlitype==7){
-			Queryresule Queryresule=new Queryresule();
-			json_err=Queryresule.query(gatherresult, gatherresult_java);
-		}else if(anlitype==8){
-			Moduleresule Moduleresule=new Moduleresule();
-			json_err=Moduleresule.module(gatherresult, gatherresult_java);
-		}else {
-			Xmltojson Xmltojson=new Xmltojson();
-			if(gatherresult.contains("<?xml")){
-				gatherresult=Xmltojson.getjson(gatherresult);
+		if("1712".equals(version)){
+			Screenresule_1712 Screenresule=new Screenresule_1712();
+			if(anlitype==1 || anlitype==2){
+				json_err=Screenresule.screenres(gatherresult,gatherresult_java);
+			}else if(anlitype==5){
+				Detailresule Detailresule= new Detailresule();
+				json_err=Detailresule.detail(gatherresult, gatherresult_java);
+			}else if(anlitype==4 || anlitype==7){
+				Queryresule Queryresule=new Queryresule();
+				json_err=Queryresule.query(gatherresult, gatherresult_java);
+			}else if(anlitype==8){
+				Moduleresule Moduleresule=new Moduleresule();
+				json_err=Moduleresule.module(gatherresult, gatherresult_java);
+			}else {
+				Xmltojson Xmltojson=new Xmltojson();
+				if(gatherresult.contains("<?xml")){
+					gatherresult=Xmltojson.getjson(gatherresult);
+				}
+				if(gatherresult_java.contains("<?xml")){
+					gatherresult_java=Xmltojson.getjson(gatherresult_java);
+				}
+				if(!gatherresult_java.equals(gatherresult)){
+					json_err.add("���ԣ�"+gatherresult);
+					json_err.add("��Ӧ��"+gatherresult_java);
+				}
 			}
-			if(gatherresult_java.contains("<?xml")){
-				gatherresult_java=Xmltojson.getjson(gatherresult_java);
-			}
-			if(!gatherresult_java.equals(gatherresult)){
-				json_err.add("���ԣ�"+gatherresult);
-				json_err.add("��Ӧ��"+gatherresult_java);
+		}else{
+			Screenresule_1609 Screenresule=new Screenresule_1609();
+			if(anlitype==1 || anlitype==2){
+				json_err=Screenresule.screenres(gatherresult,gatherresult_java);
+			}else if(anlitype==5){
+				Detailresule Detailresule= new Detailresule();
+				json_err=Detailresule.detail(gatherresult, gatherresult_java);
+			}else if(anlitype==4 || anlitype==7){
+				Queryresule Queryresule=new Queryresule();
+				json_err=Queryresule.query(gatherresult, gatherresult_java);
+			}else if(anlitype==8){
+				Moduleresule Moduleresule=new Moduleresule();
+				json_err=Moduleresule.module(gatherresult, gatherresult_java);
+			}else {
+				Xmltojson Xmltojson=new Xmltojson();
+				if(gatherresult.contains("<?xml")){
+					gatherresult=Xmltojson.getjson(gatherresult);
+				}
+				if(gatherresult_java.contains("<?xml")){
+					gatherresult_java=Xmltojson.getjson(gatherresult_java);
+				}
+				if(!gatherresult_java.equals(gatherresult)){
+					json_err.add("���ԣ�"+gatherresult);
+					json_err.add("��Ӧ��"+gatherresult_java);
+				}
 			}
 		}
+		
 		
 		//����ǲ���ҳ������治��Ҫ����
 		if(test==1){

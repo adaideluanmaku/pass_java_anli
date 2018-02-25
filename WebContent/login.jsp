@@ -122,6 +122,9 @@ $(document).ready(function(){
 			<a style="text-decoration:none;" href="Anliaction.action?anlitype=8&&res=1&&version=${version }" target="tbox"><c:out value="模块菜单"></c:out></a>
 		</dt>
 		<dt style="width:90%;height:20px;background-color:#6cbffd;margin-top:10px">
+			<a style="text-decoration:none;" href="Anliaction.action?anlitype=10&&res=1&&version=${version }" target="tbox"><c:out value="自由自定义"></c:out></a>
+		</dt>
+		<dt style="width:90%;height:20px;background-color:#6cbffd;margin-top:10px">
 			<a style="text-decoration:none;" href="Anliaction.action?anlitype=9&&res=1&&version=${version }" target="tbox"><c:out value="未定位"></c:out></a>
 		</dt>
 	</dl>

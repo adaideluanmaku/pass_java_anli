@@ -69,7 +69,7 @@ public class Passscreen {
 //		
 		//�����json�����ݿ����Ա�
 		if(anlitype==1 || anlitype==2){
-			Screenresule Screenresule=new Screenresule();
+			Screenresule_1609 Screenresule=new Screenresule_1609();
 			list=Screenresule.screenres(gatherresult,jsonback);
 		}else if(anlitype==5){
 			Detailresule Detailresule= new Detailresule();
