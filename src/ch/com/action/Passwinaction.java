@@ -130,11 +130,11 @@ public class Passwinaction {
 	}
 	
 	public void Passwin() throws IOException, TimeoutException, ClassNotFoundException, SQLException{
-		//passwin接口
+		//passwin锟接匡拷
 		if(test==1){
 			if(winurl==null || "".equals(winurl)){
-				System.out.println("访问地址为空");
-				gatherresult="访问地址为空";
+				System.out.println("锟斤拷锟绞碉拷址为锟斤拷");
+				gatherresult="锟斤拷锟绞碉拷址为锟斤拷";
 				return;
 			}
 			Passservice Passservice=new Passservice(); 
@@ -144,7 +144,7 @@ public class Passwinaction {
 //			winurl=Jiekoutype.getUrl(2, jiekoutype);
 			String url1=Jiekoutype.getUrl(2, anlitype,servername1);
 			if(url1==null){
-				err="未匹配到服务器地址";
+				err="未匹锟戒到锟斤拷锟斤拷锟斤拷锟斤拷址";
 				return;
 			}
 			Passservice Passservice=new Passservice(); 
@@ -153,7 +153,7 @@ public class Passwinaction {
 	}
 	
 	public void Passjava() throws IOException, TimeoutException, ClassNotFoundException, SQLException{
-		//passjava接口
+		//passjava锟接匡拷
 		if(test==1){
 			Passservice Passservice=new Passservice(); 
 			gatherresult_java=Passservice.getPassResult(gatherbaseinfo, url);
@@ -163,7 +163,7 @@ public class Passwinaction {
 //			url=Jiekoutype.getUrl(1, jiekoutype);
 			String url1=Jiekoutype.getUrl(1, anlitype,servername2);
 			if(url1==null){
-				err="未匹配到服务器地址";
+				err="未匹锟戒到锟斤拷锟斤拷锟斤拷锟斤拷址";
 				return;
 			}
 			Passservice Passservice=new Passservice(); 
@@ -172,43 +172,39 @@ public class Passwinaction {
 	}
 	
 	public String execute() throws IOException, TimeoutException, ClassNotFoundException, SQLException{
-		//获取服务器请求地址
+		//
 		ServerIP ServerIP=new ServerIP();
 		ServerIP.getshuju();
 		iplist=ServerIP.getList();
 		
-		//设置访问地址
+		//
 //		if(anlitype==1 || anlitype==2){
-//			System.out.println("调用win审查的接口地址");
+//			System.out.println("锟斤拷锟斤拷win锟斤拷锟侥接口碉拷址");
 //			jiekoutype=1;
 //		}
 //		if(anlitype==3 || anlitype==4 || anlitype==7){
-//			System.out.println("调用win查询的接口地址");
+//			System.out.println("锟斤拷锟斤拷win锟斤拷询锟侥接口碉拷址");
 //			jiekoutype=2;
 //		}
 //		if(anlitype==5){
-//			System.out.println("调用win查询的接口地址");
+//			System.out.println("锟斤拷锟斤拷win锟斤拷询锟侥接口碉拷址");
 //			jiekoutype=3;
 //		}
 //		if(anlitype==6){
-//			System.out.println("调用win查询的接口地址");
+//			System.out.println("锟斤拷锟斤拷win锟斤拷询锟侥接口碉拷址");
 //			jiekoutype=4;
 //		}
 //		if(anlitype==8){
-//			System.out.println("调用win查询的接口地址");
+//			System.out.println("锟斤拷锟斤拷win锟斤拷询锟侥接口碉拷址");
 //			jiekoutype=5;
 //		}
 //		System.out.println("aaa"+gatherbaseinfo);
-		//处理案例
+		//锟斤拷锟斤拷锟斤拷
 		if(req==1){
-			System.out.println("PASSWIN案例审查");
 			Passwin();
-			System.out.println("PASSWIN审查结束");
 		}
 		if(req==2){
-			System.out.println("PASSJAVA案例审查");
 			Passjava();
-			System.out.println("PASSJAVA审查结束");
 		}
 //		System.out.println("bbb"+gatherbaseinfo);
 		return "success";

@@ -172,7 +172,7 @@ public class Sa_gather_json {
 	}
 	
 	/**
-	 * ��ѯsa_gather_log����
+	 * sa_gather_log
 	 * @throws IOException 
 	 * */
 	public void getGatherlog() throws ClassNotFoundException, SQLException, IOException{
@@ -193,7 +193,7 @@ public class Sa_gather_json {
 		list=mysql.getlist(rs);
 		System.out.println(list);
 		if(list.size()>1){
-			System.out.println("出现数据重复,请查看数据库");
+//			System.out.println("出现数据重复,请查看数据库");
 			status="err";
 		}
 		for(int i=0;i<list.size();i++){
@@ -226,7 +226,7 @@ public class Sa_gather_json {
 	}
 	
 	public void getJsonerr() throws ClassNotFoundException, SQLException, IOException, TimeoutException, DocumentException{
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;
@@ -236,7 +236,7 @@ public class Sa_gather_json {
 		if("".equals(id)){
 			if("".equals(url)){
 				json_err=new ArrayList();
-				json_err.add("id和url不能为空");
+				json_err.add("id and url is null");
 				rs.close();
 				pst.close();
 				mysqlconn.close();
@@ -271,14 +271,14 @@ public class Sa_gather_json {
 	
 	public void getUpdatelog() throws ClassNotFoundException, SQLException, IOException{
 //		System.out.println(gatherbaseinfo);
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;
 		ResultSet rs=null;
 		String sql=null;
 		
-		//log��¼anlitype���
+		//anlitype
 		sql="select * from  sa_gather_log where id=?";
 		pst=mysqlconn.prepareStatement(sql);
 		pst.setInt(1, id);
@@ -357,7 +357,7 @@ public class Sa_gather_json {
 			}
 		}
 		
-		//����sa_gather_log������
+		//sa_gather_log
 		sql="update sa_gather_log set gatherresult=?,gatherbaseinfo=?,gatherresult_java=?,anlitype=? where id=?";
 		pst=mysqlconn.prepareStatement(sql);
 		pst.setString(1, gatherresult);
@@ -367,7 +367,7 @@ public class Sa_gather_json {
 		pst.setInt(5, id);
 		pst.executeUpdate();
 		
-		//����NOTE����
+		//NOTE
 		sql="select count(*) from  notes where anliname=? and version=?";
 		pst=mysqlconn.prepareStatement(sql);
 		pst.setString(1, anliname);
@@ -407,7 +407,7 @@ public class Sa_gather_json {
 	
 	public void Insertjson() throws ClassNotFoundException, SQLException, IOException{
 //		System.out.println(gatherresult);
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -423,7 +423,7 @@ public class Sa_gather_json {
 		rs.next();
 		if(Integer.parseInt(rs.getObject(1).toString())>0){
 			id=0;
-			message1="���������Ѿ����ڣ���ȷ����������Ψһ";
+			message1="repeat anliname";
 			rs.close();
 			pst.close();
 			mysqlconn.close();
@@ -455,7 +455,7 @@ public class Sa_gather_json {
 			Map map=(Map)list.get(i);
 			id=Integer.parseInt(map.get("id").toString());
 		}
-		message="�������Ʊ���ɹ�";
+		message="INSERT anliname "+anliname;
 		rs.close();
 		pst.close();
 		mysqlconn.close();
@@ -549,11 +549,11 @@ public class Sa_gather_json {
 		}
 		
 		
-		//����ǲ���ҳ������治��Ҫ����
+		//
 		if(test==1){
 			return;
 		}
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -561,7 +561,7 @@ public class Sa_gather_json {
 		String sql;
 		
 		if(json_err.size()>0){
-			//ListתJSON
+			//ListJSON
 			JSONObject obj=new JSONObject();
 			obj.element("tojson", json_err);
 			
@@ -599,7 +599,7 @@ public class Sa_gather_json {
 	}
 	
 	public String execute() throws ClassNotFoundException, SQLException, IOException, TimeoutException, DocumentException{
-		//��ȡ�����������ַ
+		//
 		ServerIP ServerIP=new ServerIP();
 		ServerIP.getshuju();
 		iplist=ServerIP.getList();
@@ -608,14 +608,13 @@ public class Sa_gather_json {
 //			if(test==1){
 //				getJsonerr1();
 //			}else{
-//				System.out.println("����anli_err��IDΪ"+id+"�ĶԱȽ��");
-//				getJsonerr();//��ѯanli_err������
+//				getJsonerr();//anli_err
 //			}
 //			return "success2";
 //		}
 		if(res==1){
-			System.out.println("获取anli_err错误ID："+id);
-			getJsonerr();//��ѯanli_err������
+			System.out.println("anli_err ID："+id);
+			getJsonerr();//anli_err
 			return "success2";
 		}
 		if(res==5){
@@ -629,15 +628,15 @@ public class Sa_gather_json {
 			Jiekoutype Jiekoutype=new Jiekoutype();
 //			url=Jiekoutype.getUrl(1, anlitype);
 //			winurl=Jiekoutype.getUrl(2, anlitype);
-			System.out.println("获取sa_gather_log案例："+anliname);
+//			System.out.println("获取sa_gather_log案例："+anliname);
 			getGatherlog();//获取sa_gather_log案例
 			return "success1";
 		}
 		
 		if(res==3){
 			System.out.println("获取sa_gather_log案例："+anliname);
-			getUpdatelog();//����sa_gather_log����
-			getGatherlog();//��ȡsa_gather_log����
+			getUpdatelog();//sa_gather_log
+			getGatherlog();//sa_gather_log
 			message="json-ok";
 			return "success1";
 		}
@@ -646,12 +645,12 @@ public class Sa_gather_json {
 		}
 		
 		if(!"".equals(anliname) && res==4){
-			System.out.println("获取sa_gather_log案例："+anliname);
+//			System.out.println("获取sa_gather_log案例："+anliname);
 			Jiekoutype Jiekoutype=new Jiekoutype();
 //			url=Jiekoutype.getUrl(1, anlitype);
 //			winurl=Jiekoutype.getUrl(2, anlitype);
-			Insertjson();//����sa_gather_log����
-			getGatherlog();//��ȡsa_gather_log����
+			Insertjson();//sa_gather_log
+			getGatherlog();//sa_gather_log
 		}
 		
 		return "success1";

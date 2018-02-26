@@ -17,7 +17,7 @@ import com.ch.jdbc.Mysqlconn;
 public class Updatejson {
 	String json;
 
-	//JSON解析
+	//JSON
 	public String getUpdate(String jsonin,String hiscode) throws IOException{
 		JSONObject obj=JSONObject.fromObject(jsonin);
 		JSONObject obj1=obj.getJSONObject("PassClient");
@@ -27,7 +27,7 @@ public class Updatejson {
 	}
 	
 	public void getUpdatejson(String hiscode,String version) throws ClassNotFoundException, SQLException, IOException{
-		//接连mysql数据库
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;

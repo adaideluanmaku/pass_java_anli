@@ -20,17 +20,12 @@ import org.apache.http.util.EntityUtils;
 
 /**
  * <ul>
- * <li>�����ƣ�  Passservice </li>
- * <li>��������PASSWEB�ӿڵ��ã�httpclientģ����ýӿ�   </li>
- * <li>�����ˣ�</li>
- * <li>����ʱ�䣺2016��6��13�� </li>
- * <li>�޸ı�ע��</li>
+ * <li>Passservice </li>
+ * <li>PASSWEB,httpclient   </li>
+ * <li></li>
  * </ul>
  */
 public class Passservice {
-	/**
-	 * ���ó�ʱʱ��
-	 */
 	private static int WS_TIMEOUT = 10 * 1000;
 
 	public String getPassResult(String jsonin,String url) throws TimeoutException, UnsupportedEncodingException {

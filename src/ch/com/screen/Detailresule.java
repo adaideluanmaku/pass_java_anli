@@ -15,7 +15,7 @@ import org.dom4j.io.SAXReader;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-//PASS详细信息结果对比
+//PASS
 public class Detailresule {
 	private String json=null;
 	private String json1=null;
@@ -79,8 +79,8 @@ public class Detailresule {
 		List listerr=new ArrayList();
 		if("".equals(json)||"".equals(json1)){
 			listerrsum=1;
-			System.out.println("详细信息数据输入不完整");
-			listerr.add("详细信息数据输入不完整");
+//			System.out.println("锟斤拷细锟斤拷息锟斤拷锟斤拷锟斤拷锟诫不锟斤拷锟斤拷");
+			listerr.add("json is null");
 			setListerr1(listerr);
 			return listerr1;
 		}
@@ -93,55 +93,55 @@ public class Detailresule {
 			json1=Xmltojson.getjson(json1);
 		}
 		
-		try{//防止错误的json导致异常
+		try{//json
 			JSONObject jsonin=JSONObject.fromObject(json);
 			JSONObject jsonin1=JSONObject.fromObject(json1);
-			System.out.println(jsonin);
-			System.out.println(jsonin1);
+//			System.out.println(jsonin);
+//			System.out.println(jsonin1);
 			
 			if(!jsonin.getString("Delimiter").equals(jsonin1.getString("Delimiter"))){
-				System.out.println("断言：Delimiter"+":"+jsonin.getString("Delimiter"));
-				System.out.println("响应：Delimiter"+":"+jsonin1.getString("Delimiter"));
-				listerr.add("断言：Delimiter"+":"+jsonin.getString("Delimiter"));
-				listerr.add("响应：Delimiter"+":"+jsonin1.getString("Delimiter"));
+//				System.out.println("Delimiter"+":"+jsonin.getString("Delimiter"));
+//				System.out.println("Delimiter"+":"+jsonin1.getString("Delimiter"));
+				listerr.add("Assertion: Delimiter==>"+jsonin.getString("Delimiter"));
+				listerr.add("Response: Delimiter==>"+jsonin1.getString("Delimiter"));
 			}
 			
 			if(!jsonin.getString("SubDelimiter").equals(jsonin1.getString("SubDelimiter"))){
-				System.out.println("断言：SubDelimiter"+":"+jsonin.getString("SubDelimiter"));
-				System.out.println("响应：SubDelimiter"+":"+jsonin1.getString("SubDelimiter"));
-				listerr.add("断言：SubDelimiter"+":"+jsonin.getString("SubDelimiter"));
-				listerr.add("响应：SubDelimiter"+":"+jsonin1.getString("SubDelimiter"));
+//				System.out.println("SubDelimiter"+":"+jsonin.getString("SubDelimiter"));
+//				System.out.println("SubDelimiter"+":"+jsonin1.getString("SubDelimiter"));
+				listerr.add("Assertion: SubDelimiter==>"+jsonin.getString("SubDelimiter"));
+				listerr.add("Response: SubDelimiter==>"+jsonin1.getString("SubDelimiter"));
 			}
 			
 			if(!jsonin.getString("DetailType").equals(jsonin1.getString("DetailType"))){
-				System.out.println("断言：DetailType"+":"+jsonin.getString("DetailType"));
-				System.out.println("响应：DetailType"+":"+jsonin1.getString("DetailType"));
-				listerr.add("断言：DetailType"+":"+jsonin.getString("DetailType"));
-				listerr.add("响应：DetailType"+":"+jsonin1.getString("DetailType"));
+//				System.out.println("DetailType"+":"+jsonin.getString("DetailType"));
+//				System.out.println("DetailType"+":"+jsonin1.getString("DetailType"));
+				listerr.add("Assertion: DetailType==>"+jsonin.getString("DetailType"));
+				listerr.add("Response: DetailType==>"+jsonin1.getString("DetailType"));
 			}
 			
 			if(!jsonin.getString("Articletitle").equals(jsonin1.getString("Articletitle"))){
-				System.out.println("断言：Articletitle"+":"+jsonin.getString("Articletitle"));
-				System.out.println("响应：Articletitle"+":"+jsonin1.getString("Articletitle"));
-				listerr.add("断言：Articletitle"+":"+jsonin.getString("Articletitle"));
-				listerr.add("响应：Articletitle"+":"+jsonin1.getString("Articletitle"));
+//				System.out.println("Articletitle"+":"+jsonin.getString("Articletitle"));
+//				System.out.println("Articletitle"+":"+jsonin1.getString("Articletitle"));
+				listerr.add("Assertion: Articletitle==>"+jsonin.getString("Articletitle"));
+				listerr.add("Response: Articletitle==>"+jsonin1.getString("Articletitle"));
 			}
 			
 			if(!jsonin.getString("Abstract").equals(jsonin1.getString("Abstract"))){
-				System.out.println("断言：Abstract:"+jsonin.getString("Abstract"));
-				System.out.println("响应：Abstract:"+jsonin1.getString("Abstract"));
-				listerr.add("断言：Abstract:"+jsonin.getString("Abstract"));
-				listerr.add("响应：Abstract:"+jsonin1.getString("Abstract"));
+//				System.out.println("Abstract:"+jsonin.getString("Abstract"));
+//				System.out.println("Abstract:"+jsonin1.getString("Abstract"));
+				listerr.add("Assertion: Abstract==>"+jsonin.getString("Abstract"));
+				listerr.add("Response: Abstract==>"+jsonin1.getString("Abstract"));
 			}
 			
 //			JSONArray names=jsonin.names();
 //			for(int i=0;i<names.size();i++){
 //				String name=names.getString(i);
 //				if(!jsonin.getString(name).equals(jsonin1.getString(name))&&!"DetailType".equals(name)){
-//					System.out.println("断言："+name+":"+jsonin.getString(name));
-//					System.out.println("响应："+name+":"+jsonin1.getString(name));
-//					listerr.add("断言："+name+":"+jsonin.getString(name));
-//					listerr.add("响应："+name+":"+jsonin1.getString(name));
+//					System.out.println("锟斤拷锟皆ｏ拷"+name+":"+jsonin.getString(name));
+//					System.out.println("锟斤拷应锟斤拷"+name+":"+jsonin1.getString(name));
+//					listerr.add("锟斤拷锟皆ｏ拷"+name+":"+jsonin.getString(name));
+//					listerr.add("锟斤拷应锟斤拷"+name+":"+jsonin1.getString(name));
 //				}
 //			}
 			
@@ -155,8 +155,8 @@ public class Detailresule {
 			
 			if(DetailResults.size()!=0 && DetailResults1.size()!=0){
 				if(DetailResults.size()!=DetailResults1.size()){
-					listerr.add("断言：DetailResults的总数为："+DetailResults.size());
-					listerr.add("响应：DetailResults的总数为："+DetailResults1.size());
+					listerr.add("Assertion: DetailResults==>"+DetailResults.size());
+					listerr.add("Response: DetailResults==>"+DetailResults1.size());
 				}
 				
 				for(int i=0;i<DetailResults.size();i++){
@@ -175,16 +175,16 @@ public class Detailresule {
 				}
 				
 				if(DetailResults.size()>0 && DetailResults1.size()==0){
-					listerr.add("断言：DetailResults："+DetailResults);
-					listerr.add("响应：DetailResults缺少结果："+DetailResults1);
+					listerr.add("Assertion: DetailResults==>"+DetailResults);
+					listerr.add("Response: DetailResults==>"+DetailResults1);
 				}
 				if(DetailResults.size()==0 && DetailResults1.size()>0){
-					listerr.add("断言：DetailResults："+DetailResults);
-					listerr.add("响应：DetailResults多余结果："+DetailResults1);
+					listerr.add("Assertion: DetailResults==>"+DetailResults);
+					listerr.add("Response: DetailResults==>"+DetailResults1);
 				}
 				if(DetailResults.size()>0 && DetailResults1.size()>0){
-					listerr.add("断言：DetailResults："+DetailResults);
-					listerr.add("响应：DetailResults："+DetailResults1);
+					listerr.add("Assertion: DetailResults==>"+DetailResults);
+					listerr.add("Response: DetailResults==>"+DetailResults1);
 				}
 			}
 			
@@ -195,8 +195,8 @@ public class Detailresule {
 			return  listerr1;
 		}catch(Exception ex){
 			listerrsum=1;
-			System.out.println("json详细节点名称可能存在问题");
-			listerr.add("json详细节点名称可能存在问题");
+//			System.out.println("json error");
+			listerr.add("json error");
 			setListerr1(listerr);
 			return listerr1;
 		}

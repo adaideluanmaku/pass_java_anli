@@ -20,22 +20,22 @@ import com.ch.redissys.Redis_update;
 import com.medicom.passlan.inter.imp.shield.ShieldImple;
 import com.medicom.passlan.redis.shield.ShieldData;
 
-//µ÷ÓÃÎ¬»¤¹¤¾ßÏµÍ³µÄË¢redis¹¦ÄÜ
+//redis
 public class Autoredis {
 	public String tablename;
 	public String selectsql;
 	
-	//Í¨¹ýÎ¬»¤¹¤¾ß¸üÐÂËùÓÐredis
+	//redis
 	public void allupdate(String anliname,String version) throws ClassNotFoundException, SQLException, IOException, TimeoutException{
 		InputStream in=PassMysqlconn.class.getClassLoader().getResourceAsStream("config.properties");
 		Properties prop=new Properties();		
 		prop.load(in);
 		String redisurl=prop.getProperty("passlanmanage");
 		
-		//½ÓÁ¬mysqlÊý¾Ý¿â
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
-		//½ÓÁ¬PASSmysqlÊý¾Ý¿â
+		//PASSmysql
 		PassMysqlconn passmysql=new PassMysqlconn();
 		Connection passmysqlconn=passmysql.getConn();
 		
@@ -56,7 +56,7 @@ public class Autoredis {
 				Map map=(Map)list.get(i);
 				String shuodongsql=map.get("sql").toString();
 				
-				//¸üÐÂPASS·þÎñÁ¬½ÓµÄPASSPA2DBÊý¾Ý¿â
+				//PASS,PASSPA2DB
 				sql=shuodongsql;
 				st=passmysqlconn.createStatement();
 				st.executeUpdate(sql);
@@ -64,19 +64,19 @@ public class Autoredis {
 			}
 			Passservice Passservice=new Passservice();
 			String result_clean = Passservice.getPassResult("",redisurl+"/redis/cleanRedis") ; 
-			System.out.println("Çå³ýredis,"+result_clean);
+//			System.out.println("ï¿½ï¿½ï¿½redis,"+result_clean);
 	    	
-	    	//³õÊ¼»¯ÏµÍ³»º´æ
+	    	//
 	    	String result_sys = Passservice.getPassResult("",redisurl+"/redis/updateSys") ;
-			System.out.println("¸üÐÂredicsÏµÍ³»º´æ£¬"+result_sys);
+//			System.out.println("ï¿½ï¿½ï¿½ï¿½redicsÏµÍ³ï¿½ï¿½ï¿½æ£¬"+result_sys);
 			
-			//³õÊ¼»¯ÏµÍ³×Ô¶¨ÒåµÄÊý¾Ý
+			//
 	    	String result_custom =Passservice.getPassResult("",redisurl+"/redis/updateCustom") ; 
-	    	System.out.println("¸üÐÂredics×Ô¶¨ÒåµÄÊý¾Ý£¬"+result_custom);
+//	    	System.out.println("ï¿½ï¿½ï¿½ï¿½redicsï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½"+result_custom);
 	    	
-	    	//³õÊ¼»¯ÏµÍ³ÆÁ±ÎÊý¾Ý
+	    	//
 	    	String result_shield = Passservice.getPassResult("",redisurl+"/redis/updateShield") ; 
-	    	System.out.println("¸üÐÂredicsÆÁ±ÎÊý¾Ý£¬"+result_shield);
+//	    	System.out.println("ï¿½ï¿½ï¿½ï¿½redicsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½"+result_shield);
 	    	
 		}
 		
@@ -86,16 +86,16 @@ public class Autoredis {
 		
 	}
 	
-	//²»Í¨¹ýÎ¬»¤¹¤¾ß£¬¸üÐÂredisµ¥ÌõÊý¾Ý
+	//redis
 	public void oneupdate(String anliname,String version,String servername) throws ClassNotFoundException, SQLException, IOException, TimeoutException, NumberFormatException, IllegalArgumentException, IllegalAccessException{
 		Redis_conf Redis_conf=new Redis_conf();
 		Redis_conf.setServername(servername);
 		Redis_conf.redisconnect();
 		
-		//½ÓÁ¬mysqlÊý¾Ý¿â
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
-		//½ÓÁ¬PASSmysqlÊý¾Ý¿â
+		//PASSmysql
 		PassMysqlconn passmysql=new PassMysqlconn();
 		Connection passmysqlconn=passmysql.getConn();
 		
@@ -118,17 +118,17 @@ public class Autoredis {
 				selectsql=map.get("selectsql").toString();
 				tablename=map.get("tablename").toString();
 				if(updatesql!=null || !"".equals(updatesql)){
-					//¸üÐÂPASS·þÎñÁ¬½ÓµÄPASSPA2DBÊý¾Ý¿â
+					//PASS,PASSPA2DB
 					System.out.println(updatesql);
 					sql=updatesql;
 					st=passmysqlconn.createStatement();
 					int t=st.executeUpdate(sql);
 					st.close();
 					if(t>0){
-						//Èç¹ûÊý¾Ý¸üÐÂ³É¹¦£¬¾Íµ÷ÓÃredisË¢ÐÂ»º´æ
+						//redis
 						oneupdateredis();
 					}else{
-						System.out.println("Î´ÕÒµ½Êý¾Ý");
+						System.out.println("NOT FIND DATA");
 					}
 				}
 			}
@@ -139,9 +139,9 @@ public class Autoredis {
 		}
 	}
 	
-	//Ë¢ÐÂµ¥¸öredisÊ±£¬ÏÈÐòÁÐ»¯¶ÔÏóºó£¬ÔÙ¸üÐÂµ½redisÀïÃæ
+	//redis
 	public void oneupdateredis() throws ClassNotFoundException, SQLException, IOException, NumberFormatException, IllegalArgumentException, IllegalAccessException{
-		//½ÓÁ¬PASSmysqlÊý¾Ý¿â
+		//PASSmysql
 		PassMysqlconn passmysql=new PassMysqlconn();
 		Connection passmysqlconn=passmysql.getConn();
 		
@@ -152,7 +152,7 @@ public class Autoredis {
 		
 		Redis_update Redis_update=new Redis_update();
 		
-		//×Öµä±í
+		//
 		if("mc_dict_doctor".equals(tablename)){
 			System.out.println(selectsql);
 			sql=selectsql;
@@ -335,7 +335,7 @@ public class Autoredis {
 			rs.close();
 			st.close();
 		}else if("mc_user_adult".equals(tablename)){
-			//×Ô¶¨Òå±í
+			//
 			sql=selectsql;
 			st=passmysqlconn.createStatement();
 			rs=st.executeQuery(sql);
@@ -551,7 +551,7 @@ public class Autoredis {
 			rs.close();
 			st.close();
 		}else if("mc_user_shielddata".equals(tablename)){
-			//ÆÁ±Î±í
+			//ï¿½ï¿½ï¿½Î±ï¿½
 			sql=selectsql;
 			st=passmysqlconn.createStatement();
 			rs=st.executeQuery(sql);
@@ -564,7 +564,7 @@ public class Autoredis {
 			rs.close();
 			st.close();
 		}else{
-			System.out.println("Î´ÕÒµ½±íË¢redis");
+			System.out.println("Î´ï¿½Òµï¿½ï¿½ï¿½Ë¢redis");
 		}
 		
 		

@@ -25,14 +25,14 @@ import com.ch.jdbc.Mysqlconn;
 import com.ch.jdbc.Sqlserverconn;
 
 public class Json_err {
-	public int zpage=0;//��ҳ��
-	public int page=1;//��ǰҳ��
-	public int sum=15;//ҳ����ʾ����
+	public int zpage=0;//
+	public int page=1;//
+	public int sum=15;//
 	public int id;
 	public int anlitype;
 	public String anliname;
 	public List list;
-	public int count;//ҳ������
+	public int count;//
 	public int errcount;
 	public int req=0;
 	public int paixu=0;
@@ -125,18 +125,16 @@ public class Json_err {
 		this.id = id;
 	}
 	
-	//ҳ�����ݴ���
+	//
 	public void getShujubaoliu() throws ClassNotFoundException, SQLException, IOException{
-//		System.out.println("��ǰҳ�棺"+page);
-//		System.out.println("��ҳ��"+zpage);
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;
 		ResultSet rs=null;
 		String sql=null;
 		
-		//��ʼҳ����ߵ�һ���������ݿ⣬��֤��Сҳ�����ݣ����ҷ�ҳ���ܱ�����ǰҳ��
+		//
 		if(page<=1){
 			sql="select count(*) from sa_gather_log where anlitype=? and anliname like ? and version=?";
 			pst=mysqlconn.prepareStatement(sql);
@@ -153,7 +151,7 @@ public class Json_err {
 		if(zpage==0){
 			return;
 		}
-		//��֤���ҳ������
+		//
 		if(page>zpage){
 			page=page-1;
 		}
@@ -219,9 +217,9 @@ public class Json_err {
 		mysqlconn.close();
 	}
 	
-	//���õ�����鰸�����
+	//
 	public void Jsonscreen() throws ClassNotFoundException, SQLException, TimeoutException, DocumentException, IOException, NumberFormatException, IllegalArgumentException, IllegalAccessException{
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;
@@ -238,7 +236,7 @@ public class Json_err {
 			mysqlconn.close();
 			return;
 		}
-		//���԰���
+		//
 //		System.out.println(id);
 		sql="select id,gatherbaseinfo,gatherresult,anliname,anlitype,moduleid,modulename from sa_gather_log where id=? and  anlitype=?";
 		pst=mysqlconn.prepareStatement(sql);
@@ -252,23 +250,23 @@ public class Json_err {
 			Map map=(Map)jsonlist.get(i);
 			gatherbaseinfo=map.get("gatherbaseinfo").toString();
 			gatherresult=map.get("gatherresult").toString();
-			anliname1=map.get("anliname").toString();//�ֶ����Բ���shoudong������ʹ��
-			id=Integer.parseInt(map.get("id").toString());//����sa_gather_log������ʹ��
+			anliname1=map.get("anliname").toString();//shoudong
+			id=Integer.parseInt(map.get("id").toString());//sa_gather_log
 			
 
-//			if(anlitype==2){//�ֶ�����ʱ�����ñ������ֵ��ˢ��redis
+//			if(anlitype==2){//redis
 //				Autoredis Autoredis=new Autoredis();
 //				Autoredis.oneupdate(anliname1,map.get("version").toString(),servername);
 //			}
 			
-//			//��ȡJAVA�����,���Ա���ȷ��
+//			//JAVA
 			Passscreen Passscreen=new Passscreen();
 //			Passscreen.getResult(gatherbaseinfo, gatherresult,jiekoutype);
 			Passscreen.getResult(gatherbaseinfo, gatherresult,anlitype,servername);
 			
 			List jsonerr=Passscreen.getList();
 			
-			//�������ݵ���Ӧ�Ŀ�
+			//
 			String jsonback=Passscreen.getJsonback();
 			sql="update sa_gather_log set gatherresult_java=? where id=?";
 			pst=mysqlconn.prepareStatement(sql);
@@ -277,7 +275,7 @@ public class Json_err {
 			pst.executeUpdate();
 			
 			if(jsonerr.size()>0){
-				//ListתJSON
+				//ListJSON
 				JSONObject obj=new JSONObject();
 				obj.element("tojson", jsonerr);
 				
@@ -315,9 +313,9 @@ public class Json_err {
 		mysqlconn.close();
 	}
 	
-	//����ȫ����鰸�����
+	//
 	public void Jsonscreenall() throws ClassNotFoundException, SQLException, TimeoutException, DocumentException, IOException, NumberFormatException, IllegalArgumentException, IllegalAccessException{
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;
@@ -326,7 +324,7 @@ public class Json_err {
 		String sql=null;
 		
 		
-		//���԰���
+		//
 //		System.out.println(anlitype);
 		if(StringUtils.isBlank(anliname)){
 			sql="select a.id,a.gatherbaseinfo,a.gatherresult,a.anliname,a.anlitype,a.moduleid,a.modulename,a.version,b.anlistatus from sa_gather_log a "
@@ -363,23 +361,23 @@ public class Json_err {
 			System.out.println(map.get("anliname"));
 			gatherbaseinfo=map.get("gatherbaseinfo").toString();
 			gatherresult=map.get("gatherresult").toString();
-			id=Integer.parseInt(map.get("id").toString());//����sa_gather_log������ʹ��
-			anliname1=map.get("anliname").toString();//��anli_err����ʹ��
+			id=Integer.parseInt(map.get("id").toString());//sa_gather_log
+			anliname1=map.get("anliname").toString();//anli_err
 //			String anliname1=map.get("anliname").toString();//�ֶ����Բ���shoudong������ʹ��
 			
-//			if(anlitype==2){//�ֶ�����ʱ�����ñ������ֵ��ˢ��redis
+//			if(anlitype==2){//redis
 //				Autoredis Autoredis=new Autoredis();
 //				Autoredis.oneupdate(anliname1,map.get("version").toString(),servername);
 //				
 //			}
 			
-			//��ȡJAVA�����,���Ա���ȷ��
+			//
 			Passscreen Passscreen=new Passscreen();
 //			Passscreen.getResult(gatherbaseinfo, gatherresult,jiekoutype);
 			Passscreen.getResult(gatherbaseinfo, gatherresult,anlitype,servername);
 			List jsonerr=Passscreen.getList();
 			
-			//�������ݵ���Ӧ�Ŀ�
+			//
 			String jsonback=Passscreen.getJsonback();
 			sql="update sa_gather_log set gatherresult_java=? where id=?";
 			pst=mysqlconn.prepareStatement(sql);
@@ -388,7 +386,7 @@ public class Json_err {
 			pst.executeUpdate();
 			
 			if(jsonerr.size()>0){
-				//ListתJSON
+				//ListJSON
 				JSONObject obj=new JSONObject();
 				obj.element("tojson", jsonerr);
 				sql="select count(*) from anli_err where id=?";
@@ -422,12 +420,12 @@ public class Json_err {
 			}
 		}
 		
-		//ɾ����������
+		//
 		sql="delete from anli_err where id not in(select id from sa_gather_log)";
 		st=mysqlconn.createStatement();
 		st.executeUpdate(sql);
 		
-		//��¼��������
+		//
 		sql="select count(*) from anli_err where anliname like ? and version=? and anlitype=?";
 		pst=mysqlconn.prepareStatement(sql);
 		pst.setString(1, "%"+anliname+"%");
@@ -487,7 +485,7 @@ public class Json_err {
 	}
 	
 	public String execute() throws ClassNotFoundException, SQLException, TimeoutException, DocumentException, IOException, NumberFormatException, IllegalArgumentException, IllegalAccessException{
-		//��ȡ�����������ַ
+		//
 		ServerIP ServerIP=new ServerIP();
 		ServerIP.getshuju();
 		iplist=ServerIP.getList();
@@ -502,24 +500,23 @@ public class Json_err {
 //		}
 		
 		if(req==1){
-			System.out.println("�����������");
+			System.out.println("screenone");
 			Jsonscreen();
 			messeage=2;
 		}
 		if(req==2){
-			System.out.println("ȫ���������");
+			System.out.println("screenall");
 			Jsonscreenall();
 			messeage=1;
 		}
 		if(req==3){
-			System.out.println("ɾ��������"+anliname);
+			System.out.println("delete:"+anliname);
 			//安全起见后期会屏蔽这个功能
 //			deletejson();
 		}
 		
-		//��ʱȥ��ˢ��redis�Ĺ���
+		//redis
 //		if(req==4){
-//			System.out.println("ˢ��redis��"+redisanliname);
 //			Autoredis Autoredis=new Autoredis();
 //			Autoredis.oneupdate(redisanliname,version);
 //		}

@@ -25,7 +25,7 @@ import com.ch.jdbc.Sqlserverconn;
 
 /**
  * 2016.11.26
- * ��sqlserver�������ݵ�mysql��
+ * sqlserver-mysql
  * **/
 public class Daoanli {
 	public String anliname;
@@ -82,15 +82,15 @@ public class Daoanli {
 	//sqlserver���������ݵ�mysql
 	public String Sqlser_to_mysql_all(String version,int dao,String anliname1) throws ClassNotFoundException, SQLException, IOException{
 		if(StringUtils.isBlank(version)){
-			return "������汾��";
+			return "not find version";
 		}
 		InputStream in=Mysqlconn.class.getClassLoader().getResourceAsStream("config.properties");
 		Properties prop=new Properties();		
 		prop.load(in);
 		
-		//����sqlserver���ݿ�
+		//sqlserver
 		Sqlserverconn sqlser=new Sqlserverconn();
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		
 		Connection sqlserconn=sqlser.getConn();
@@ -105,7 +105,7 @@ public class Daoanli {
 		rs=st.executeQuery(sql);
 		List sqlserlist=sqlser.getlist(rs);
 		
-		//����ǰɾ��log��,ȫɾ����ɾ�����ְ���
+		//
 		if(dao==111){
 			sql="delete from sa_gather_log where version=? and usertype <> 1";
 			pst=mysqlconn.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class Daoanli {
 			pst.executeUpdate();
 		}else if(dao==112){
 			if("".equals(anliname1) || anliname1==null){
-				return "��������Ϊ��";
+				return "anliname is not null";
 			}
 			sql="delete from  sa_gather_log where anliname like ? and version=? and usertype <> 1";
 			pst=mysqlconn.prepareStatement(sql);
@@ -128,7 +128,7 @@ public class Daoanli {
 			pst.executeUpdate();
 		}
 		
-		//ɾ����������,ȫɾ����ɾ�����ְ���
+		//
 		if(dao==111){
 			sql="delete from anli_err where version=?";
 			pst=mysqlconn.prepareStatement(sql);
@@ -149,17 +149,17 @@ public class Daoanli {
 		}
 		
 		
-		// Ĭ�������ÿִ��һ��sql�ύһ�� ,�ر��Զ��ύ�������.commit()ʵ������ִ��sql
+		//sql.commit()
 		
 		String hiscode=prop.getProperty("hiscode");
-		Updatejson Updatejson=new Updatejson();//������ʱ����HISCODEֵ
+		Updatejson Updatejson=new Updatejson();//HISCODE
 		mysqlconn.setAutoCommit(false);
 		sql="insert into sa_gather_log(gatherbaseinfo,gatherresult,anliname,anlitype,moduleid,modulename,version,usertype) values(?,?,?,?,?,?,?,?)";
 		pst=mysqlconn.prepareStatement(sql);
 		
 		for(int i=0;i<sqlserlist.size();i++){
 			Map sqlsermap=(Map)sqlserlist.get(i);
-			//gatherbaseinfo��������,�ֽ�����
+			//gatherbaseinfo
 			Baseinfo(sqlsermap.get("gatherbaseinfo").toString(),version);
 			if(dao==111){
 				String gatherbaseinfo=Updatejson.getUpdate(sqlsermap.get("gatherbaseinfo").toString(),hiscode);//�滻HISCODE
@@ -201,9 +201,9 @@ public class Daoanli {
 			}
 		}
 		pst.executeBatch();
-		//���setAutoCommit(false)����������ִ��SQL
+		//setAutoCommit(false)
 		mysqlconn.commit();
-		System.out.println("���ݵ������");
+//		System.out.println("finish");
 		
 		//去重处理
 		if(dao==111){
@@ -231,7 +231,7 @@ public class Daoanli {
 		}
 		List sqlserlist1=mysql.getlist(rs);
 		
-		//����ǰɾ��log��
+		//LOG
 		if(dao==111){
 			sql="delete from sa_gather_log where version=? and usertype <> 1 ";
 			pst=mysqlconn.prepareStatement(sql);
@@ -270,16 +270,15 @@ public class Daoanli {
 			pst.addBatch();
 		}
 		pst.executeBatch();
-		//���setAutoCommit(false)����������ִ��SQL
+		//setAutoCommit(false)
 		mysqlconn.commit();
-		System.out.println("��������ȥ�ش������");
 		
 		st.close();
 		rs.close();
 		pst.close();
 		sqlserconn.close();
 		mysqlconn.close();
-		System.out.println("sqlserver����mysql����");
-		return "sqlserver����mysql����";
+		System.out.println("finish to do from sqlserver to mysql");
+		return "finish to do from sqlserver to mysql";
 	}
 }

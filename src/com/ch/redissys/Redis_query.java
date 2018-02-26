@@ -57,7 +57,7 @@ import redis.clients.jedis.Jedis;
 
 public class Redis_query {
 	/**
-	 * ��ѯϵͳ������
+	 * 
 	 * @throws IOException 
 	 * */
 	public String servername;
@@ -144,7 +144,7 @@ public class Redis_query {
 			return list;
 		}
 		if("".equals(str)){
-			list.add("redis�����ݣ�conversion="+str);
+			list.add("drug_cost_dose_unit,redis is null");
 			return list;
 		}
 		list.add("conversion="+str);
@@ -494,8 +494,8 @@ public class Redis_query {
 	}
 	
 	public List interInfaceImpl(String hiscode,String Druguniquecodeone,String Druguniquecodetwo) throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, IOException, SQLException{
-		System.out.println("user_inter-"+hiscode+"-"+Druguniquecodeone+"-"+Druguniquecodetwo);
-		System.out.println("����user_inter-"+hiscode+"-"+Druguniquecodetwo+"-"+Druguniquecodeone);
+//		System.out.println("user_inter-"+hiscode+"-"+Druguniquecodeone+"-"+Druguniquecodetwo);
+//		System.out.println("����user_inter-"+hiscode+"-"+Druguniquecodetwo+"-"+Druguniquecodeone);
 		List list=new ArrayList();
 		Redis_conf Redis_conf =new Redis_conf(); 
 		Redis_conf.setServername(servername);
@@ -676,7 +676,7 @@ public class Redis_query {
 	}
 	
 	/**
-	 * ��ѯ��������
+	 * 
 	 * @throws IOException 
 	 * @throws SQLException 
 	 * */
@@ -687,15 +687,15 @@ public class Redis_query {
 		Jedis jedis = Redis_conf.redisconnect();
 		List list=new ArrayList();
 		if(jedis==null){
-			list.add("shieldImple,redis����ʧ��");
+			list.add("shieldImple,redis is null");
 			return list;
 		}
-		Set<String> keys=jedis.keys("*user_shielddata-*");//ģ����ѯ���α����ݣ���ȡ����KEY
+		Set<String> keys=jedis.keys("*user_shielddata-*");//KEY
 		Iterator<String> keyit=keys.iterator() ;  
 		List<ShieldData> listobject = new ArrayList<ShieldData>();
 		while(keyit.hasNext()){   
 			String key = keyit.next();  
-//			System.out.println(key);//���ݴ洢��������?dict_doctor-36-630602��������ɾ��ǰ�����ַ�
+//			System.out.println(key);//dict_doctor-36-630602
 			key=key.substring(2);
 //			System.out.println(key);
 			String[] str=key.split("-");

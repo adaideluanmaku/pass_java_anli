@@ -21,7 +21,7 @@ public class Jiekoutype {
 //		InputStream in=Passscreen.class.getClassLoader().getResourceAsStream("config.properties");
 //		Properties prop=new Properties();
 //		prop.load(in);
-		//接连mysql数据库
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -37,7 +37,7 @@ public class Jiekoutype {
 			List list=mysql.getlist(rs);
 			for(int i=0;i<list.size();i++){
 				Map map=(Map)list.get(i);
-				//passjava接口
+				//passjava锟接匡拷
 				if(type==1 || type==2){
 					url=map.get("address")+"/PASSwebService.asmx/Mc_DoScreen";
 				}
@@ -65,7 +65,7 @@ public class Jiekoutype {
 			List list=mysql.getlist(rs);
 			for(int i=0;i<list.size();i++){
 				Map map=(Map)list.get(i);
-				//passwin接口
+				//passwin锟接匡拷
 				if(type==1 || type==2){
 					url=map.get("address")+"/PASSwebService.asmx/Mc_DoScreen";
 				}

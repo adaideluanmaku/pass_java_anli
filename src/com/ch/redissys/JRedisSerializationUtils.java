@@ -17,12 +17,8 @@ import com.esotericsoftware.kryo.io.Output;
 /**
  * 
  * <ul>
- * <li>椤圭洰鍚嶇О锛歊edisInit </li>
- * <li>绫诲悕绉帮細  JRedisSerializationUtils </li>
- * <li>绫绘弿杩帮細   搴忓垪鍖栧璞�/li>
- * <li>鍒涘缓浜猴細鍛ㄥ簲寮�</li>
- * <li>鍒涘缓鏃堕棿锛�016骞�鏈�3鏃�</li>
- * <li>淇敼澶囨敞锛�/li>
+ * <li>edisInit </li>
+ * <li>JRedisSerializationUtils </li>
  * </ul>
  */
 public class JRedisSerializationUtils {
@@ -31,7 +27,7 @@ public class JRedisSerializationUtils {
 //	private static Kryo kryo = new Kryo();
 			   //   .createStructConfiguration();
 
-	/** fst搴忓垪鍖�*/
+	/** fst*/
 	public static byte[] serialize(Object obj) {
 		//return configuration.asByteArray(obj);
 		ByteArrayOutputStream out = null;
@@ -43,7 +39,7 @@ public class JRedisSerializationUtils {
 			fout.flush();
 			return out.toByteArray();
 		} catch (IOException e) {
-			//logger.error("FST搴忓垪鍖栧嚭閿欙細",e);
+			//logger.error("FST",e);
 			return null;
 		}finally {
 			if(fout != null)
@@ -53,7 +49,7 @@ public class JRedisSerializationUtils {
 		}
 	}
 
-//	/** fst鍙嶅簭鍒楀寲 */
+//	/** fst */
 	public static Object unserialize(byte[] bytes) {
 		//return configuration.asObject(sec);
 		FSTObjectInput in = null;
@@ -61,7 +57,7 @@ public class JRedisSerializationUtils {
 			in = new FSTObjectInput(new ByteArrayInputStream(bytes));
 			return in.readObject();
 		} catch (Exception e) {
-			//logger.error("FST鍙嶅簭鍒楀寲鍑洪敊锛�,e);
+			//logger.error("FST,e);
 			return null;
 		} finally {
 			if(in != null)

@@ -95,7 +95,7 @@ public class Redis_keys {
 	}
 
 	public void addshoudong_redis() throws ClassNotFoundException, SQLException, IOException{
-		//����mysql��ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -121,7 +121,7 @@ public class Redis_keys {
 			pst.setString(6, version);
 			int sum=pst.executeUpdate();
 			if(sum>0){
-				message="����"+anliname+"�ֶ�����ű��ɹ�";
+				message="UPDATE "+anliname;
 			}
 		}else{
 			sql="insert into shoudong_redis(updatesql,selectsql,tablename,anliname,version,recsql) values(?,?,?,?,?,?)";
@@ -134,7 +134,7 @@ public class Redis_keys {
 			pst.setString(6, recsql);
 			int sum=pst.executeUpdate();
 			if(sum>0){
-				message="����"+anliname+"�ֶ�����ű��ɹ�";
+				message="INSERT "+anliname;
 			}
 		}
 		rs.close();
@@ -143,7 +143,7 @@ public class Redis_keys {
 	}
 	
 	public void shoudongchaxun() throws ClassNotFoundException, SQLException, IOException{
-		//����mysql��ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -168,7 +168,7 @@ public class Redis_keys {
 				recsql1=map.get("recsql").toString();
 			}
 		}else{
-			message="δ�ҵ�"+anliname+"��"+tablename+"��";
+			message="NOT FIND anliname="+anliname+",tablename="+tablename;
 		}
 		
 		
@@ -178,7 +178,7 @@ public class Redis_keys {
 	}
 	
 	public void shoudongdelete() throws ClassNotFoundException, SQLException, IOException{
-		//����mysql��ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -193,9 +193,9 @@ public class Redis_keys {
 		pst.setString(3, tablename);
 		int a=pst.executeUpdate();
 		if(a>0){
-			message="ɾ��"+anliname+"��"+tablename+"��ɹ�";
+			message="DELETE anliname="+anliname+",tablename="+tablename;
 		}else{
-			message="δ�ҵ�"+anliname+"��"+tablename+"��";
+			message="NOT FIND anliname="+anliname+",tablename="+tablename;
 		}
 		
 		pst.close();
@@ -207,7 +207,7 @@ public class Redis_keys {
 			if((!"".equals(anliname) && anliname!=null)&&!"".equals(version)){
 				addshoudong_redis();
 			}else{
-				message="������ƻ��߰汾��Ϊ��";
+				message="anliname is null or version is null";
 			}
 //			if(message!=null){
 ////				message = new String(message.getBytes("ISO-8859-1"), "UTF-8");
@@ -224,7 +224,7 @@ public class Redis_keys {
 			if(!"".equals(version) && !"".equals(anliname) && !"".equals(tablename)){
 				shoudongdelete();
 			}else{
-				message="ɾ��ʧ�ܣ�������ƻ��߱���δ��д";
+				message="version is null or anliname is null or tablename is null";
 			}
 		}
 		message=URLEncoder.encode(message, "UTF-8");

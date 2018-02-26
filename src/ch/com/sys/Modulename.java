@@ -128,81 +128,81 @@ public class Modulename {
 //		return name;
 //	}
 	
-	public void module(String Name){
-		if(Name.contains("��������")){//�жϲ�ѯģ��
-			moduleid=52;
-			modulename="��Ҫ��ʾ";
-		}else if(Name.contains("˵����")){
-			moduleid=11;
-			modulename="˵����";
-		}else if(Name.contains("��Χ")  || Name.contains("������")){//�ж����ģ��
-			moduleid=1;
-			modulename="������Χ";
-		}else if(Name.contains("����")){
-			moduleid=2;
-			modulename="���𺦼���";
-		}else if(Name.contains("����")){
-			moduleid=3;
-			modulename="���𺦼���";
-		}else if(Name.contains("�໥")){
-			moduleid=4;
-			modulename="�໥����";
-		}else if(Name.contains("����") || Name.contains("����-")){
-			moduleid=5;
-			modulename="��������";
-		}else if(Name.contains("����Ũ��") || Name.contains("����-Ũ��") || Name.contains("������")){
-			moduleid=6;
-			modulename="����Ũ��";
-		}else if(Name.contains("ҩ�����") || Name.contains("ҩ��-����")){
-			moduleid=7;
-			modulename="ҩ�����";
-		}else if(Name.contains("����")){
-			moduleid=8;
-			modulename="������Ӧ";
-		}else if(Name.contains("����")){
-			moduleid=9;
-			modulename="����Ӧ֢";
-		}else if(Name.contains("��ͯ")){
-			moduleid=10;
-			modulename="��ͯ��ҩ";
-		}else if(Name.contains("����")){
-			moduleid=11;
-			modulename="������ҩ";
-		}else if(Name.contains("����")){
-			moduleid=12;
-			modulename="������ҩ";
-		}else if(Name.contains("����")){
-			moduleid=13;
-			modulename="������ҩ";
-		}else if(Name.contains("����")){
-			moduleid=14;
-			modulename="������ҩ";
-		}else if(Name.contains("�Ա�")){
-			moduleid=15;
-			modulename="�Ա���ҩ";
-		}else if(Name.contains("����")){
-			moduleid=16;
-			modulename="ҩ�����";
-		}else if(Name.contains("��ҩ")){
-			moduleid=17;
-			modulename="��ҩ;��";
-		}else if(Name.contains("�ظ�")){
-			moduleid=18;
-			modulename="�ظ���ҩ";
-		}else if(Name.contains("ԽȨ")){
-			moduleid=19;
-			modulename="ԽȨ��ҩ";
-		}else if(Name.contains("Χ��") ){
-			moduleid=20;
-			modulename="Χ������";
-		}else if(Name.contains("ϸ��")){
-			moduleid=21;
-			modulename="ϸ����ҩ";
-		}else{
-			moduleid=0;
-			modulename="δƥ��";
-		}
-	}
+//	public void module(String Name){
+//		if(Name.contains("��������")){//�жϲ�ѯģ��
+//			moduleid=52;
+//			modulename="��Ҫ��ʾ";
+//		}else if(Name.contains("˵����")){
+//			moduleid=11;
+//			modulename="˵����";
+//		}else if(Name.contains("��Χ")  || Name.contains("������")){//�ж����ģ��
+//			moduleid=1;
+//			modulename="������Χ";
+//		}else if(Name.contains("����")){
+//			moduleid=2;
+//			modulename="���𺦼���";
+//		}else if(Name.contains("����")){
+//			moduleid=3;
+//			modulename="���𺦼���";
+//		}else if(Name.contains("�໥")){
+//			moduleid=4;
+//			modulename="�໥����";
+//		}else if(Name.contains("����") || Name.contains("����-")){
+//			moduleid=5;
+//			modulename="��������";
+//		}else if(Name.contains("����Ũ��") || Name.contains("����-Ũ��") || Name.contains("������")){
+//			moduleid=6;
+//			modulename="����Ũ��";
+//		}else if(Name.contains("ҩ�����") || Name.contains("ҩ��-����")){
+//			moduleid=7;
+//			modulename="ҩ�����";
+//		}else if(Name.contains("����")){
+//			moduleid=8;
+//			modulename="������Ӧ";
+//		}else if(Name.contains("����")){
+//			moduleid=9;
+//			modulename="����Ӧ֢";
+//		}else if(Name.contains("��ͯ")){
+//			moduleid=10;
+//			modulename="��ͯ��ҩ";
+//		}else if(Name.contains("����")){
+//			moduleid=11;
+//			modulename="������ҩ";
+//		}else if(Name.contains("����")){
+//			moduleid=12;
+//			modulename="������ҩ";
+//		}else if(Name.contains("����")){
+//			moduleid=13;
+//			modulename="������ҩ";
+//		}else if(Name.contains("����")){
+//			moduleid=14;
+//			modulename="������ҩ";
+//		}else if(Name.contains("�Ա�")){
+//			moduleid=15;
+//			modulename="�Ա���ҩ";
+//		}else if(Name.contains("����")){
+//			moduleid=16;
+//			modulename="ҩ�����";
+//		}else if(Name.contains("��ҩ")){
+//			moduleid=17;
+//			modulename="��ҩ;��";
+//		}else if(Name.contains("�ظ�")){
+//			moduleid=18;
+//			modulename="�ظ���ҩ";
+//		}else if(Name.contains("ԽȨ")){
+//			moduleid=19;
+//			modulename="ԽȨ��ҩ";
+//		}else if(Name.contains("Χ��") ){
+//			moduleid=20;
+//			modulename="Χ������";
+//		}else if(Name.contains("ϸ��")){
+//			moduleid=21;
+//			modulename="ϸ����ҩ";
+//		}else{
+//			moduleid=0;
+//			modulename="δƥ��";
+//		}
+//	}
 	
 	public void module1(String Name) throws ClassNotFoundException, SQLException, IOException{
 		Mysqlconn mysql=new Mysqlconn();

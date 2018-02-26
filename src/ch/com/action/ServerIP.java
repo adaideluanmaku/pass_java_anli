@@ -75,7 +75,7 @@ public class ServerIP {
 	}
 
 	public void addip() throws ClassNotFoundException, SQLException, IOException{
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -109,7 +109,7 @@ public class ServerIP {
 				ziduan=ziduan+"redispw='"+redispw+"',";
 			}
 			ziduan=ziduan.substring(0, ziduan.length()-1);
-			System.out.println("��������ƴ���ֶΣ�"+ziduan);
+//			System.out.println("��������ƴ���ֶΣ�"+ziduan);
 			sql="update serverip set "+ziduan+" where servername=?";
 			pst=mysqlconn.prepareStatement(sql);
 			pst.setString(1, servername);
@@ -136,7 +136,7 @@ public class ServerIP {
 	}
 	
 	public void getshuju() throws ClassNotFoundException, SQLException, IOException{
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -155,7 +155,7 @@ public class ServerIP {
 	}
 	
 	public void deleteshuju() throws ClassNotFoundException, SQLException, IOException{
-		//����mysql���ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;

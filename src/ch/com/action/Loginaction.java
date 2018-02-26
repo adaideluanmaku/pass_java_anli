@@ -57,9 +57,9 @@ public class Loginaction {
 		return list;
 	}
 
-	//»ñÈ¡°¸ÀıÀàĞÍÉú³ÉÁĞ±í
+	//
 	public void anlifenlei() throws ClassNotFoundException, SQLException, IOException{
-		//½ÓÁ¬mysqlÊı¾İ¿â
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		
@@ -72,9 +72,9 @@ public class Loginaction {
 		mysqlconn.close();
 	}
 	
-	//±¸·İLOG±í
+	//LOG
 	public void logbak() throws ClassNotFoundException, SQLException, IOException{
-		//½ÓÁ¬mysqlÊı¾İ¿â
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
@@ -82,7 +82,7 @@ public class Loginaction {
 		ResultSet rs;
 		String sql;
 		
-//		//ÑéÖ¤Ò³ÃæÑ¡ÔñµÄ°æ±¾ºÅºÍlog±íÀïÃæÊı¾İµÄ°æ±¾ºÅÊÇ·ñÒ»ÖÂ
+//		//ï¿½ï¿½Ö¤Ò³ï¿½ï¿½Ñ¡ï¿½ï¿½Ä°æ±¾ï¿½Åºï¿½logï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İµÄ°æ±¾ï¿½ï¿½ï¿½Ç·ï¿½Ò»ï¿½ï¿½
 //		sql="select count(version) from sa_gather_log where version=?";
 //		pst=mysqlconn.prepareStatement(sql);
 //		pst.setString(1, version);
@@ -90,7 +90,7 @@ public class Loginaction {
 //		rs.next();
 //		int sum=Integer.parseInt(rs.getObject(1).toString());
 //		if(sum==0){
-//			message="Ñ¡ÔñµÄ°æ±¾ºÅºÍÊı¾İ¿âÊı¾İ°æ±¾ºÅ²»Ò»ÖÂ";
+//			message="Ñ¡ï¿½ï¿½Ä°æ±¾ï¿½Åºï¿½ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½İ°æ±¾ï¿½Å²ï¿½Ò»ï¿½ï¿½";
 //			return;
 //		}
 		
@@ -100,17 +100,17 @@ public class Loginaction {
 		rs=pst.executeQuery();
 		List sqlserlist=mysql.getlist(rs);
 		if(sqlserlist.size()==0){
-			message="±¸·İÊ±log±íÎŞÊı¾İ";
+			message="not find "+version;
 			return;
 		}
 		
-		//±¸·İlog±í£¬±¸·İÇ°É¾³ılog_bak±í
+		//log_bak
 		sql="delete from sa_gather_log_bak where version=?";
 		pst=mysqlconn.prepareStatement(sql);
 		pst.setString(1, version);
 		pst.executeUpdate();
 		
-		// Ä¬ÈÏÇé¿öÏÂÃ¿Ö´ĞĞÒ»ÌõsqlÌá½»Ò»´Î ,¹Ø±Õ×Ô¶¯Ìá½»£¬¿ÉÅäºÏ.commit()ÊµÏÖÅúÁ¿Ö´ĞĞsql
+		//sql
 		mysqlconn.setAutoCommit(false);
 		sql="insert into sa_gather_log_bak(anlitype,moduleid,modulename,anliname,gatherbaseinfo,gatherresult,version,usertype) values(?,?,?,?,?,?,?,?)";
 		pst=mysqlconn.prepareStatement(sql);
@@ -135,17 +135,17 @@ public class Loginaction {
 			pst.addBatch();
 		}
 		pst.executeBatch();
-		//ÅäºÏsetAutoCommit(false)·½·¨£¬ÅúÁ¿Ö´ĞĞSQL
+		//setAutoCommit(false)
 		mysqlconn.commit();
 		rs.close();
 		pst.close();
 		mysqlconn.close();
-		message="log±í±¸·İÍê³É";
+		message="Finish the log bak";
 	}
 	
-	//»¹Ô­LOG±í
+	//LOG
 	public void huanyuanlog() throws ClassNotFoundException, SQLException, IOException{
-		//½ÓÁ¬mysqlÊı¾İ¿â
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst=null;
@@ -159,23 +159,23 @@ public class Loginaction {
 		rs=pst.executeQuery();
 		List sqlserlist=mysql.getlist(rs);
 		if(sqlserlist.size()==0){
-			message="±¸·İ±íÀïÃæÃ»ÓĞÊı¾İ";
+			message="ï¿½ï¿½ï¿½İ±ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 			return;
 		}
 		
-		//»¹Ô­log±í£¬±¸·İÇ°É¾³ılog±í
+		//log
 		sql="delete from sa_gather_log where version=?";
 		pst=mysqlconn.prepareStatement(sql);
 		pst.setString(1, version);
 		pst.executeUpdate();
 		
-		//É¾³ıÀ¬»øÊı¾İ
+		//
 		sql="delete from anli_err where version=?";
 		pst=mysqlconn.prepareStatement(sql);
 		pst.setString(1, version);
 		pst.executeUpdate();
 				
-		// Ä¬ÈÏÇé¿öÏÂÃ¿Ö´ĞĞÒ»ÌõsqlÌá½»Ò»´Î ,¹Ø±Õ×Ô¶¯Ìá½»£¬¿ÉÅäºÏ.commit()ÊµÏÖÅúÁ¿Ö´ĞĞsql
+		//
 		mysqlconn.setAutoCommit(false);
 		sql="insert into sa_gather_log(anlitype,moduleid,modulename,anliname,gatherbaseinfo,gatherresult,version,usertype) values(?,?,?,?,?,?,?,?)";
 		pst=mysqlconn.prepareStatement(sql);
@@ -192,13 +192,13 @@ public class Loginaction {
 			pst.addBatch();
 		}
 		pst.executeBatch();
-		//ÅäºÏsetAutoCommit(false)·½·¨£¬ÅúÁ¿Ö´ĞĞSQL
+		//setAutoCommit(false)
 		mysqlconn.commit();
 		rs.close();
 		pst.close();
 		st.close();
 		mysqlconn.close();
-		message="log±í»¹Ô­Íê³É";
+		message="Restore log completion";
 	}
 	
 	public String execute() throws ClassNotFoundException, SQLException, IOException{
@@ -209,36 +209,27 @@ public class Loginaction {
 		
 		if(req==1){
 			if(dao==100){
-				message="ÇëÑ¡Ôñµ¼ÈëµÄ°¸ÀıÀàĞÍ";
+				message="not Import";
 			}else{
-				System.out.println("¿ªÊ¼´ÓÔ´Êı¾İ¿âµ¼Èë°¸Àıµ½mysqlÊı¾İ¿â");
 				Daoanli Daoanli=new Daoanli();
 				message=Daoanli.Sqlser_to_mysql_all(version,dao,anliname);
-				System.out.println("°¸Àıµ¼Èë½áÊø");
 			}
 			return "success2";
 		}
 		if(req==2 && !"".equals(hiscode)){
-			System.out.println("¸üĞÂHISCODE");
 			Updatejson Updatejson=new Updatejson();
 			Updatejson.getUpdatejson(hiscode,version);
-			System.out.println("¸üĞÂ½áÊø");
-			message="HISCODE¸üĞÂÍê³É";
+			message="UPDATE HISCODE";
 			return "success2";
 		}
 		if(req==3){
-			System.out.println("±¸·İlog±í");
 			logbak();
-			System.out.println("±¸·İ½áÊø");
 			return "success2";
 		}
 		if(req==4){
-			System.out.println("»¹Ô­log±í");
 			huanyuanlog();
-			System.out.println("»¹Ô­½áÊø");
 			return "success2";
 		}
-		System.out.println("¿ªÊ¼²éÕÒ°¸ÀıÀàĞÍ");
 //		anlifenlei();
 		return "success1";
 	}

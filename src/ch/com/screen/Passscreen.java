@@ -47,19 +47,19 @@ public class Passscreen {
 		url=Jiekoutype.getUrl(1, anlitype,servername);
 		list=new ArrayList();
 		if(url==null){
-			list.add("δ�ҵ����ʵ�����ַ");
+			list.add("url is null");
 			return list;
 		}
-		//�������˷��ؽ��json
+		//json
 		Passservice Passservice=new Passservice();
 		jsonback=Passservice.getPassResult(gatherbaseinfo, url);
 		
 		if(jsonback==null){
-			list.add("pass-java���ؽ��Ϊ��");
+			list.add("pass-java is null");
 			return list;
 		}
 		if("".equals(gatherresult)){
-			list.add("pass-win��������Ϊ��");
+			list.add("pass-win is null");
 			return list;
 		}
 //		if("".equals(gatherresult) && jsonback.length()>0){
@@ -67,7 +67,7 @@ public class Passscreen {
 //			return list;
 //		}
 //		
-		//�����json�����ݿ����Ա�
+		//json
 		if(anlitype==1 || anlitype==2){
 			Screenresule_1609 Screenresule=new Screenresule_1609();
 			list=Screenresule.screenres(gatherresult,jsonback);
@@ -90,8 +90,8 @@ public class Passscreen {
 			}
 			
 			if(!jsonback.equals(gatherresult)){
-				list.add("���ԣ�"+gatherresult);
-				list.add("��Ӧ��"+jsonback);
+				list.add("Assertion: json==>"+gatherresult);
+				list.add("Response: json==>"+jsonback);
 			}
 		}
 		return list;

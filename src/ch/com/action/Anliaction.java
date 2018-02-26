@@ -17,14 +17,14 @@ import com.opensymphony.xwork2.inject.Container;
 public class Anliaction {
 	public int anlitype;
 	public List list;
-	public int zpage=0;//��ҳ��
-	public int page=1;//��ǰҳ��
-	public int sum=15;//ҳ����ʾ����
+	public int zpage=0;//
+	public int page=1;//
+	public int sum=15;//
 	public int res;
 	public String anliname;
-	public int count;//ҳ������
+	public int count;//
 	public int paixu=0;
-	public String version;//��ȡ��ݰ汾
+	public String version;//
 	public List iplist;
 	
 	public List getIplist() {
@@ -120,14 +120,14 @@ public class Anliaction {
 //	}
 	
 	public void getShuju() throws ClassNotFoundException, SQLException, IOException{
-		//����mysql��ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
 		ResultSet rs;
 		String sql;
 		
-		//��ʼҳ����ߵ�һ��������ݿ⣬��֤��Сҳ����ݣ����ҷ�ҳ���ܱ�����ǰҳ��
+		//
 		if(page<=1){
 			sql="select count(*) from sa_gather_log where anlitype=? and version=?";
 			pst=mysqlconn.prepareStatement(sql);
@@ -143,7 +143,7 @@ public class Anliaction {
 		if(zpage==0){
 			return;
 		}
-		//��֤���ҳ�����
+		//
 		if(page>zpage){
 			page=page-1;
 		}
@@ -168,22 +168,20 @@ public class Anliaction {
 	}
 	
 	/**
-	 * �����ѯ����
+	 * 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 * @throws IOException 
 	 * */
 	public void getAnli() throws ClassNotFoundException, SQLException, IOException {
-//		System.out.println("��ǰҳ�棺"+page);
-//		System.out.println("��ҳ��"+zpage);
-		//����mysql��ݿ�
+		//mysql
 		Mysqlconn mysql=new Mysqlconn();
 		Connection mysqlconn=mysql.getConn();
 		PreparedStatement pst;
 		ResultSet rs;
 		String sql;
 		
-		//��ʼҳ����ߵ�һ��������ݿ⣬��֤��Сҳ����ݣ����ҷ�ҳ���ܱ�����ǰҳ��
+		//
 //		System.out.println(anliname);
 		if(page<=1){
 			sql="select count(*) from sa_gather_log where anlitype=? and anliname like ? and version=?";
@@ -201,7 +199,7 @@ public class Anliaction {
 		if(zpage==0){
 			return;
 		}
-		//��֤���ҳ�����
+		//
 		if(page>zpage){
 			page=page-1;
 		}
@@ -235,20 +233,18 @@ public class Anliaction {
 	}
 	
 	public String execute() throws ClassNotFoundException, SQLException, IOException{
-		//��ȡ�����������ַ
+		//
 		ServerIP ServerIP=new ServerIP();
 		ServerIP.getshuju();
 		iplist=ServerIP.getList();
 		
-//		Version();//��ȡ��ݰ汾
-		//����ȫ�����
+//		Version();//
+		//
 		if(res==1){
-			System.out.println("��ȡȫ�����");
 			getShuju();
 		}
-		//�����������
+		//
 		if(res==2){
-			System.out.println("������Ʋ�ѯ���߷�ҳ��"+anliname);
 			getAnli();
 		}
 		return "success";

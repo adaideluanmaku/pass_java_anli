@@ -9,7 +9,7 @@ public class Fenye {
 		return page;
 	}
 
-	//输入数据总数，输入页面显示条数
+	//
 	public int getZpage(int count,int sum) {
 		if(count%sum>0){
 			this.zpage=count/sum+1;
@@ -31,6 +31,6 @@ public class Fenye {
 //			this.page=1;
 //			zsnum1=zsnum-((page-1)*10);
 //		}
-//		System.out.println("数据列表:"+zpage+":"+zsnum1);
+//		System.out.println("锟斤拷锟斤拷锟叫憋拷:"+zpage+":"+zsnum1);
 //	}
 }
